@@ -1,0 +1,20 @@
+inherited FrmProduceOrderTracking: TFrmProduceOrderTracking
+  Caption = 'FrmProduceOrderTracking'
+  ClientHeight = 269
+  ClientWidth = 528
+  Font.Charset = DEFAULT_CHARSET
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  WindowState = wsMaximized
+  ExplicitWidth = 544
+  ExplicitHeight = 307
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited RzPanel1: TRzPanel
+    Width = 528
+    ExplicitWidth = 528
+    inherited RzToolbarButton1: TRzToolbarButton
+      Left = 465
+    end
+  end
+end

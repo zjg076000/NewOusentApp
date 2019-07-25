@@ -1,0 +1,211 @@
+inherited frmPositive: TfrmPositive
+  Caption = 'frmPositive'
+  ClientHeight = 321
+  ClientWidth = 468
+  Font.Charset = DEFAULT_CHARSET
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  ExplicitWidth = 484
+  ExplicitHeight = 359
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited RzPanel1: TRzPanel
+    Width = 468
+    ExplicitWidth = 468
+    object RzPanel3: TRzPanel
+      Left = 0
+      Top = 0
+      Width = 468
+      Height = 34
+      Align = alTop
+      Alignment = taLeftJustify
+      AlignmentVertical = avTop
+      BorderOuter = fsNone
+      BorderSides = [sdBottom]
+      BorderColor = clWhite
+      BorderShadow = clWhite
+      TabOrder = 0
+      ExplicitWidth = 487
+      object Label1: TLabel
+        Left = 26
+        Top = 8
+        Width = 48
+        Height = 13
+        Caption = #21592#24037#22995#21517
+      end
+      object Label2: TLabel
+        Left = 236
+        Top = 7
+        Width = 48
+        Height = 13
+        Caption = #25152#23646#37096#38376
+      end
+      object lbl_Person: TRzLabel
+        Left = 84
+        Top = 10
+        Width = 110
+        Height = 14
+        AutoSize = False
+        Caption = 'lbl_Person'
+        BorderInner = fsFlat
+        BorderSides = [sdBottom]
+      end
+      object btn_Select: TSpeedButton
+        Left = 200
+        Top = 2
+        Width = 20
+        Height = 20
+        Caption = #8595
+      end
+      object RzLabel1: TRzLabel
+        Left = 294
+        Top = 9
+        Width = 110
+        Height = 14
+        AutoSize = False
+        Caption = 'lbl_Person'
+        BorderInner = fsFlat
+        BorderSides = [sdBottom]
+      end
+    end
+  end
+  inherited RzPanel4: TRzPanel
+    Top = 280
+    Width = 468
+    ExplicitTop = 280
+    ExplicitWidth = 468
+  end
+  inherited RzPanel2: TRzPanel
+    Width = 468
+    Height = 246
+    ExplicitWidth = 468
+    ExplicitHeight = 246
+    object RzPanel5: TRzPanel
+      Left = 0
+      Top = 1
+      Width = 468
+      Height = 244
+      Align = alClient
+      BorderOuter = fsFlat
+      BorderSides = [sdTop, sdBottom]
+      TabOrder = 0
+      ExplicitTop = 34
+      ExplicitWidth = 487
+      ExplicitHeight = 293
+      object Label31: TLabel
+        Left = 29
+        Top = 33
+        Width = 48
+        Height = 12
+        Caption = #36716#27491#20107#30001
+        Font.Charset = GB2312_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = #23435#20307
+        Font.Style = []
+        ParentFont = False
+      end
+      object Label3: TLabel
+        Left = 29
+        Top = 123
+        Width = 48
+        Height = 12
+        Caption = #36716#27491#31867#22411
+        Font.Charset = GB2312_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = #23435#20307
+        Font.Style = []
+        ParentFont = False
+      end
+      object Label28: TLabel
+        Left = 29
+        Top = 161
+        Width = 48
+        Height = 12
+        Caption = #24320#22987#26102#38388
+        Font.Charset = GB2312_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = #23435#20307
+        Font.Style = []
+        ParentFont = False
+      end
+      object Label4: TLabel
+        Left = 29
+        Top = 205
+        Width = 60
+        Height = 12
+        Caption = #22791'   '#27880'   '
+        Font.Charset = GB2312_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = #23435#20307
+        Font.Style = []
+        ParentFont = False
+      end
+      object DBEdit2: TDBEdit
+        Left = 87
+        Top = 30
+        Width = 290
+        Height = 66
+        AutoSize = False
+        BevelEdges = [beBottom]
+        BevelKind = bkFlat
+        BorderStyle = bsNone
+        Ctl3D = True
+        DataField = 'Reason'
+        DataSource = dso
+        ImeName = #20013#25991'('#31616#20307') - '#25628#29399#25340#38899#36755#20837#27861
+        ParentCtl3D = False
+        TabOrder = 0
+      end
+      object DBLookupComboBox1: TDBLookupComboBox
+        Left = 87
+        Top = 122
+        Width = 139
+        Height = 19
+        BevelEdges = [beBottom]
+        BevelInner = bvNone
+        BevelOuter = bvNone
+        BevelKind = bkFlat
+        Ctl3D = False
+        DataField = 'TypeId'
+        KeyField = 'TypeId'
+        ListField = 'Name'
+        ParentCtl3D = False
+        TabOrder = 1
+      end
+      object DBEdit1: TDBEdit
+        Left = 87
+        Top = 198
+        Width = 290
+        Height = 66
+        AutoSize = False
+        BevelEdges = [beBottom]
+        BevelKind = bkFlat
+        BorderStyle = bsNone
+        Ctl3D = True
+        DataField = 'Note'
+        ImeName = #20013#25991'('#31616#20307') - '#25628#29399#25340#38899#36755#20837#27861
+        ParentCtl3D = False
+        TabOrder = 3
+      end
+      object DBDateTimeEditEh1: TDBDateTimeEditEh
+        Left = 87
+        Top = 160
+        Width = 134
+        Height = 21
+        BevelEdges = [beBottom]
+        BevelKind = bkFlat
+        BorderStyle = bsNone
+        DataField = 'OnDate'
+        DynProps = <>
+        EditButtons = <>
+        TabOrder = 2
+        Visible = True
+        EditFormat = 'yyyy-mm-dd'
+      end
+    end
+  end
+end

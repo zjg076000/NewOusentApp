@@ -1,0 +1,18 @@
+ object FrmOverTime_CopyData: TFrmOverTime_CopyData
+  Caption = 'FrmOverTime_CopyData'
+  ClientHeight = 383
+  ClientWidth = 463
+  Font.Charset = DEFAULT_CHARSET
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  ExplicitWidth = 479
+  ExplicitHeight = 421
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited RzPanel1: TRzPanel
+    Width = 463
+    inherited RzToolbarButton1: TRzToolbarButton
+      Left = 400
+    end
+  end
+end

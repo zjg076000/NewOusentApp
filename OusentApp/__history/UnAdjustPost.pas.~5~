@@ -1,0 +1,47 @@
+unit UnAdjustPost;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs,UnBase_AddEdit, RzEdit, RzDBEdit,
+  DBCtrlsEh, Vcl.DBCtrls, Vcl.StdCtrls, Vcl.Mask, RzLabel, RzDBLbl, Data.DB,
+  Data.Win.ADODB, Vcl.Buttons, Vcl.ExtCtrls, RzPanel;
+
+type
+  TFrmAdjustPost = class(TFrmBase_AddEdit)
+    Label1: TLabel;
+    RzDBLabel2: TRzDBLabel;
+    RzPanel3: TRzPanel;
+    Label31: TLabel;
+    Label3: TLabel;
+    Label28: TLabel;
+    Label4: TLabel;
+    Label5: TLabel;
+    RzDBLabel1: TRzDBLabel;
+    DBEdit2: TDBEdit;
+    DBLookupComboBox1: TDBLookupComboBox;
+    DBEdit1: TDBEdit;
+    DBDateTimeEditEh1: TDBDateTimeEditEh;
+    Label6: TLabel;
+    RzDBLabel4: TRzDBLabel;
+    Label7: TLabel;
+    RzDBLabel5: TRzDBLabel;
+    RzDBEdit1: TRzDBEdit;
+    RzDBLabel3: TRzDBLabel;
+    Label8: TLabel;
+    Label2: TLabel;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FrmAdjustPost: TFrmAdjustPost;
+
+implementation
+
+{$R *.dfm}
+
+end.

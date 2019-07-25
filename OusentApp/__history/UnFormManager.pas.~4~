@@ -1,0 +1,39 @@
+unit UnFormManager;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs,unbase_pnl, Vcl.Buttons, RzButton,
+  Vcl.ExtCtrls, RzPanel, Vcl.StdCtrls;
+
+type
+  TFrmFormManager = class(Tfrmbase_pnl)
+    RzPanel2: TRzPanel;
+    RzPanel3: TRzPanel;
+    RzPanel4: TRzPanel;
+    RzPanel5: TRzPanel;
+    RzPanel6: TRzPanel;
+    Label1: TLabel;
+    Label2: TLabel;
+    procedure RzToolbarButton1Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FrmFormManager: TFrmFormManager;
+
+implementation
+
+{$R *.dfm}
+
+procedure TFrmFormManager.RzToolbarButton1Click(Sender: TObject);
+begin
+  close;
+
+end;
+
+end.

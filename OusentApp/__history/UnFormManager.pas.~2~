@@ -1,0 +1,24 @@
+unit UnFormManager;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs,unbase_pnl;
+
+type
+  TFrmFormManager = class(Tfrmbase_pnl)
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FrmFormManager: TFrmFormManager;
+
+implementation
+
+{$R *.dfm}
+
+end.

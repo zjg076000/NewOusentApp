@@ -1,0 +1,51 @@
+unit UnSalerRight;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, DBGridEhGrouping, ToolCtrlsEh,
+  DBGridEhToolCtrls, DynVarsEh, EhLibVCL, GridsEh, DBAxisGridsEh, DBGridEh,
+  AdvGlowButton, Vcl.StdCtrls, Vcl.ExtCtrls, RzPanel, Data.DB, Datasnap.DBClient;
+
+type
+  TFrmSalerRight = class(TForm)
+    RzPanel1: TRzPanel;
+    lbl: TLabel;
+    Edt_User: TEdit;
+    Label1: TLabel;
+    Edt_Password: TEdit;
+    btnLogin: TAdvGlowButton;
+    Grd: TDBGridEh;
+    RzPanel2: TRzPanel;
+    AdvGlowButton1: TAdvGlowButton;
+    cdt: TClientDataSet;
+    dso: TDataSource;
+    cdtIsSelect: TBooleanField;
+    cdtName: TStringField;
+    procedure btnLoginClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FrmSalerRight: TFrmSalerRight;
+
+implementation
+
+{$R *.dfm}
+
+procedure TFrmSalerRight.btnLoginClick(Sender: TObject);
+begin
+    if  (Edt_User.Text='SYSTEM') and  (Edt_Password.Text='MANAGER') then
+    begin
+        btnLogin.Caption:='注销';
+
+    end
+    else
+      ShowMessage('用户名或者密码错误');
+end;
+
+end.

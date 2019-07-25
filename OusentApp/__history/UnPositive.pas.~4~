@@ -1,0 +1,30 @@
+unit UnPositive;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs,UnBase_AddEdit;
+
+type
+  TfrmPositive = class(TFrmBase_AddEdit)
+    procedure FormCreate(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmPositive: TfrmPositive;
+
+implementation
+
+{$R *.dfm}
+
+procedure TfrmPositive.FormCreate(Sender: TObject);
+begin
+
+end;
+
+end.

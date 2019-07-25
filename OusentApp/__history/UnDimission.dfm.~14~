@@ -1,0 +1,283 @@
+inherited frmDimission: TfrmDimission
+  Caption = #21150#29702#31163#32844
+  ClientHeight = 368
+  ClientWidth = 487
+  Font.Charset = DEFAULT_CHARSET
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  ExplicitTop = -114
+  ExplicitWidth = 503
+  ExplicitHeight = 406
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited RzPanel1: TRzPanel
+    Width = 487
+    ExplicitWidth = 487
+    object Label1: TLabel
+      Left = 26
+      Top = 8
+      Width = 48
+      Height = 13
+      Caption = #21592#24037#22995#21517
+    end
+    object Label2: TLabel
+      Left = 236
+      Top = 7
+      Width = 48
+      Height = 13
+      Caption = #25152#23646#37096#38376
+    end
+    object lbl_Person: TRzLabel
+      Left = 84
+      Top = 10
+      Width = 110
+      Height = 14
+      AutoSize = False
+      Caption = 'lbl_Person'
+      BorderInner = fsFlat
+      BorderSides = [sdBottom]
+    end
+    object btn_Select: TSpeedButton
+      Left = 200
+      Top = 2
+      Width = 20
+      Height = 20
+      Caption = #8595
+    end
+    object RzLabel1: TRzLabel
+      Left = 294
+      Top = 9
+      Width = 110
+      Height = 14
+      AutoSize = False
+      Caption = 'lbl_Person'
+      BorderInner = fsFlat
+      BorderSides = [sdBottom]
+    end
+  end
+  inherited RzPanel4: TRzPanel
+    Top = 327
+    Width = 487
+    ExplicitTop = 327
+    ExplicitWidth = 487
+  end
+  inherited RzPanel2: TRzPanel
+    Width = 487
+    Height = 293
+    ExplicitWidth = 487
+    ExplicitHeight = 293
+    object Label31: TLabel
+      Left = 29
+      Top = 33
+      Width = 48
+      Height = 12
+      Caption = #31163#32844#20107#30001
+      Font.Charset = GB2312_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = #23435#20307
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label3: TLabel
+      Left = 29
+      Top = 123
+      Width = 48
+      Height = 12
+      Caption = #31163#32844#31867#22411
+      Font.Charset = GB2312_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = #23435#20307
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label28: TLabel
+      Left = 29
+      Top = 161
+      Width = 48
+      Height = 12
+      Caption = #24320#22987#26102#38388
+      Font.Charset = GB2312_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = #23435#20307
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label4: TLabel
+      Left = 29
+      Top = 205
+      Width = 60
+      Height = 12
+      Caption = #22791'   '#27880'   '
+      Font.Charset = GB2312_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = #23435#20307
+      Font.Style = []
+      ParentFont = False
+    end
+    object DBEdit2: TDBEdit
+      Left = 87
+      Top = 30
+      Width = 290
+      Height = 66
+      AutoSize = False
+      BevelEdges = [beBottom]
+      BevelKind = bkFlat
+      BorderStyle = bsNone
+      Ctl3D = True
+      DataField = 'Reason'
+      DataSource = dso
+      ImeName = #20013#25991'('#31616#20307') - '#25628#29399#25340#38899#36755#20837#27861
+      ParentCtl3D = False
+      TabOrder = 0
+    end
+    object DBLookupComboBox1: TDBLookupComboBox
+      Left = 87
+      Top = 122
+      Width = 138
+      Height = 19
+      BevelEdges = [beBottom]
+      BevelInner = bvNone
+      BevelOuter = bvNone
+      BevelKind = bkFlat
+      Ctl3D = False
+      DataField = 'TypeId'
+      DataSource = dso
+      KeyField = 'TypeId'
+      ListField = 'Name'
+      ListSource = dsotype
+      ParentCtl3D = False
+      TabOrder = 1
+    end
+    object DBEdit1: TDBEdit
+      Left = 87
+      Top = 198
+      Width = 290
+      Height = 66
+      AutoSize = False
+      BevelEdges = [beBottom]
+      BevelKind = bkFlat
+      BorderStyle = bsNone
+      Ctl3D = True
+      DataField = 'Note'
+      DataSource = dso
+      ImeName = #20013#25991'('#31616#20307') - '#25628#29399#25340#38899#36755#20837#27861
+      ParentCtl3D = False
+      TabOrder = 3
+    end
+    object DBDateTimeEditEh1: TDBDateTimeEditEh
+      Left = 87
+      Top = 160
+      Width = 134
+      Height = 21
+      BevelEdges = [beBottom]
+      BevelKind = bkFlat
+      BorderStyle = bsNone
+      DataField = 'OnDate'
+      DataSource = dso
+      DynProps = <>
+      EditButtons = <>
+      TabOrder = 2
+      Visible = True
+      EditFormat = 'yyyy-mm-dd'
+    end
+  end
+  object pnl_select: TPanel [3]
+    Left = 301
+    Top = 88
+    Width = 185
+    Height = 248
+    Caption = 'pnl_select'
+    TabOrder = 3
+    Visible = False
+    object RzPanel3: TRzPanel
+      Left = 1
+      Top = 1
+      Width = 183
+      Height = 22
+      Align = alTop
+      BorderOuter = fsFlat
+      TabOrder = 0
+      object edt: TEdit
+        Left = 1
+        Top = 1
+        Width = 181
+        Height = 20
+        Align = alClient
+        BorderStyle = bsNone
+        TabOrder = 0
+      end
+    end
+    object RzPanel5: TRzPanel
+      Left = -7
+      Top = 55
+      Width = 183
+      Height = 224
+      BorderOuter = fsFlat
+      BorderSides = [sdLeft, sdRight, sdBottom]
+      TabOrder = 1
+      object Grd: TDBGrid
+        Left = -15
+        Top = 8
+        Width = 181
+        Height = 223
+        BorderStyle = bsNone
+        DataSource = dso_person
+        TabOrder = 0
+        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -11
+        TitleFont.Name = 'Tahoma'
+        TitleFont.Style = []
+        Columns = <
+          item
+            Expanded = False
+            FieldName = 'PName'
+            Title.Caption = #22995#21517
+            Visible = True
+          end>
+      end
+    end
+  end
+  inherited dso: TDataSource
+    Left = 416
+    Top = 192
+  end
+  inherited adt: TADODataSet
+    Active = False
+    CommandText = ' select top 1  *  from  Hrm_Dimission'
+    Left = 373
+    Top = 192
+  end
+  object adt_Person: TADODataSet
+    Active = True
+    Connection = dm_DaTa.adoconn
+    CursorType = ctStatic
+    CommandText = ' select   *  from  Hrm_Person'#13#10#13#10
+    Parameters = <>
+    Left = 368
+    Top = 41
+  end
+  object dso_person: TDataSource
+    DataSet = adt_Person
+    Left = 424
+    Top = 41
+  end
+  object dsotype: TDataSource
+    DataSet = adttype
+    Left = 424
+    Top = 112
+  end
+  object adttype: TADODataSet
+    Active = True
+    Connection = dm_DaTa.adoconn
+    CursorType = ctStatic
+    CommandText = ' select  *  from  Hrm_DimissionType'
+    Parameters = <>
+    Left = 365
+    Top = 104
+  end
+end

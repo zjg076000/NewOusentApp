@@ -1,0 +1,38 @@
+unit UnBase_AddEdit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Buttons, AdvGlowButton,
+  Vcl.ExtCtrls, RzPanel;
+
+type
+  TFrmBase_AddEdit = class(TForm)
+    RzPanel1: TRzPanel;
+    AdvGlowButton5: TAdvGlowButton;
+    RzPanel4: TRzPanel;
+    btnSaveAdd: TSpeedButton;
+    btnSave: TSpeedButton;
+    btnCancel: TSpeedButton;
+    RzPanel2: TRzPanel;
+  private
+
+    _PersonId: iNTEGER; // 定义一个属性  员工编号
+    _AddOrEdit: string;
+
+  public
+      Psql: string;
+  published
+    property PersonId: integer read _PersonId write _PersonId;
+    property AddOrEdit: string read _AddOrEdit write _AddOrEdit;
+  end;
+
+var
+  FrmBase_AddEdit: TFrmBase_AddEdit;
+
+implementation
+
+{$R *.dfm}
+
+end.

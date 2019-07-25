@@ -1,0 +1,64 @@
+unit UnOrderNumData;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs,Unbase_pnl, AdvSmoothLabel, Vcl.Buttons,
+  RzButton, Vcl.ExtCtrls, RzPanel, DBGridEhGrouping, ToolCtrlsEh,
+  DBGridEhToolCtrls, DynVarsEh, EhLibVCL, GridsEh, DBAxisGridsEh, DBGridEh,
+  AdvGlowButton, Vcl.ComCtrls, Vcl.StdCtrls, MemTableDataEh, Data.DB,
+  Data.Win.ADODB, MemTableEh, DataDriverEh;
+
+type
+  TFrmOrderNumData = class(Tfrmbase_pnl)
+    advsmthlbl1: TAdvSmoothLabel;
+    RzPanel4: TRzPanel;
+    Label28: TLabel;
+    Label2: TLabel;
+    datebegin: TDateTimePicker;
+    dateend: TDateTimePicker;
+    btn_OrderNum_Locate: TAdvGlowButton;
+    GRD: TDBGridEh;
+    adt: TADODataSet;
+    dsd: TDataSetDriverEh;
+    dso: TDataSource;
+    mte: TMemTableEh;
+    mteId: TLargeintField;
+    mteOrderType: TWideStringField;
+    mteOrderDate: TDateTimeField;
+    mteOrderNum: TWideStringField;
+    mteCustOrderNum: TWideStringField;
+    mteCustCode: TWideStringField;
+    mteCustProdType: TWideStringField;
+    mteProductType: TWideStringField;
+    mteSpecifications: TWideStringField;
+    mteAmount: TIntegerField;
+    mtePrice: TBCDField;
+    mteAmountMoney: TBCDField;
+    mteShippedNum: TIntegerField;
+    mteDeliveryDate: TDateTimeField;
+    mteEstimateDate: TDateTimeField;
+    mteShippingDate: TDateTimeField;
+    mteOffsetDay: TIntegerField;
+    mteOrderState: TWideStringField;
+    mteSaleMan: TWideStringField;
+    mteNote: TWideStringField;
+    mteIsSelect: TBooleanField;
+    mteIsDelay: TBooleanField;
+    mteIsOutBuy: TBooleanField;
+    qry: TADOQuery;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FrmOrderNumData: TFrmOrderNumData;
+
+implementation
+
+{$R *.dfm}
+
+end.

@@ -1,0 +1,173 @@
+unit UnLeave;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, unbase_pnl, Vcl.Buttons, RzButton,
+  Vcl.ExtCtrls, RzPanel, Vcl.ComCtrls, RzDTP, RzDBDTP, RzBorder, Vcl.StdCtrls,
+  Vcl.DBCtrls, AdvGlowButton, Vcl.WinXPanels, MemTableDataEh, Data.DB,
+  DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh, EhLibVCL,
+  GridsEh, DBAxisGridsEh, DBGridEh, MemTableEh, DataDriverEh, Data.Win.ADODB;
+
+type
+  TFrmLeave = class(Tfrmbase_pnl)
+    RzToolbarButton3: TRzToolbarButton;
+    RzToolbarButton6: TRzToolbarButton;
+    adt: TADODataSet;
+    dsd: TDataSetDriverEh;
+    dso: TDataSource;
+    mte: TMemTableEh;
+    Grd: TDBGridEh;
+    pnl_locate: TRzPanel;
+    Label1: TLabel;
+    edt_name: TEdit;
+    Label2: TLabel;
+    date_begin: TRzDateTimePicker;
+    Label3: TLabel;
+    date_end: TRzDateTimePicker;
+    btn_OrderNum_Locate: TAdvGlowButton;
+    chk_locate: TCheckBox;
+    btnEdit: TRzToolbarButton;
+    adtPCode: TWideStringField;
+    adtPName: TWideStringField;
+    adtDeptName: TWideStringField;
+    adtLeaveId: TLargeintField;
+    adtPersonId: TIntegerField;
+    adtDeptId: TIntegerField;
+    adtLeaveDate: TDateTimeField;
+    adtReason: TWideStringField;
+    adtBeginTime: TDateTimeField;
+    adtEndTime: TDateTimeField;
+    adtHourTime: TBCDField;
+    adtOnDate: TDateTimeField;
+    procedure chk_locateClick(Sender: TObject);
+    procedure RzToolbarButton3Click(Sender: TObject);
+    procedure btnEditClick(Sender: TObject);
+  private
+    // strsql:string;
+    procedure LocateData; // 查询数据
+
+  public
+
+  end;
+
+var
+  FrmLeave: TFrmLeave;
+
+implementation
+
+{$R *.dfm}
+
+uses UnLeave_AddEdit, UnData;
+
+procedure TFrmLeave.btnEditClick(Sender: TObject);
+var
+  LeaveId: integer;
+begin
+  if mte.RecordCount = 0 then
+    exit;
+  LeaveId := adt.FieldByName('LeaveId').asinteger;
+  FrmLeave_AddEdit := tFrmLeave_AddEdit.create(self);
+  FrmLeave_AddEdit.keyId := mte.FieldByName('LeaveId').asinteger;
+  LeaveId := mte.FieldByName('LeaveId').asinteger;
+   FrmLeave_AddEdit.Psql :=
+    'select top 1 * from Hrm_Leave  where LeaveId='+inttostr(LeaveId);
+  dm_Data.proc_ActiveAdodataset(FrmLeave_AddEdit.adt, FrmLeave_AddEdit.Psql);
+  FrmLeave_AddEdit.adt.Edit;
+  FrmLeave_AddEdit.Caption := '更新请假资料';
+  FrmLeave_AddEdit.AddOrEdit := 'Edit';
+  FrmLeave_AddEdit.ShowModal;
+  adt.close;
+  adt.open;
+  mte.close;
+  mte.open;
+  mte.locate('LeaveId', LeaveId, []);
+  // grd.Refresh;
+  { if  FrmPerson_AddEdit.showmodal()=Idok then
+    begin
+
+
+    end;
+  }
+
+end;
+
+procedure TFrmLeave.chk_locateClick(Sender: TObject);
+begin
+  if chk_locate.Checked then
+    pnl_locate.visible := true
+  else
+    pnl_locate.visible := false;
+
+end;
+
+procedure TFrmLeave.LocateData;
+var
+  datebegin, dateend: String;
+  workstate: integer;
+begin
+  datebegin := formatdatetime('yyyy-mm-dd', date_begin.Date);
+  dateend := formatdatetime('yyyy-mm-dd', date_end.Date);
+  Psql := 'select * from Ou_OrderNum_Data where (Convert(varchar(10),begintime,120) >='''
+    + datebegin + ''' ' + ' and Convert(varchar(10),begintime,120) <=''' +
+    datebegin + ''')';
+  // 按订单号
+  { if cmb_OrderNum.Text > '' then
+    strsql := strsql + ' and OrderNum=''' + cmb_OrderNum.Text + '''';
+
+    // 按产品类型
+    if cmb_OrderNumProdType.Text > '' then
+    strsql := strsql + ' and ProductType=''' + cmb_OrderNumProdType.Text + '''';
+
+    // 订单条件
+    if cmb_OrderNumWorkState.Text > '' then
+    begin
+    if cmb_OrderNumWorkState.Text = '未生产' then
+    workstate := 0;
+
+    if cmb_OrderNumWorkState.Text = '生产中' then
+    workstate := 1;
+
+    if cmb_OrderNumWorkState.Text = '已完工' then
+    workstate := 2;
+    // SHOWMESSAGE(inttostr(workstate));
+    strsql := strsql + ' and Workstate=' + inttostr(workstate);
+    end;
+
+    with adt_OrderNumData do
+    begin
+    close;
+    commandtext := strsql;
+    open;
+    Mte_OrderNumData.close;
+    Mte_OrderNumData.open;
+    end;
+  }
+end;
+
+procedure TFrmLeave.RzToolbarButton3Click(Sender: TObject);
+begin
+
+  FrmLeave_AddEdit := tFrmLeave_AddEdit.create(self);
+  FrmLeave_AddEdit.Caption := '输入请假记录';
+  FrmLeave_AddEdit.Psql :=
+    'select top 1 * from Hrm_Leave order by LeaveId desc ';
+  dm_Data.proc_ActiveAdodataset(FrmLeave_AddEdit.adt, FrmLeave_AddEdit.Psql);
+  FrmLeave_AddEdit.adt.Append;
+  FrmLeave_AddEdit.adt.FieldByName('begintime').AsDateTime :=
+    strtodatetime(formatdatetime('yyyy-mm-dd hh:nn', now));
+  FrmLeave_AddEdit.adt.FieldByName('Endtime').AsDateTime := now;
+
+  IF FrmLeave_AddEdit.ShowModal = Idok then;
+  begin
+    adt.Requery();
+
+    mte.close;
+    mte.open;
+
+  end;
+end;
+
+end.

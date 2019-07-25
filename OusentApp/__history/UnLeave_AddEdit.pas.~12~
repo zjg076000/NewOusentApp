@@ -1,0 +1,55 @@
+unit UnLeave_AddEdit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Buttons, Vcl.StdCtrls, Vcl.Mask,
+  Vcl.DBCtrls, Vcl.ComCtrls, RzDTP, RzDBDTP, AdvGlowButton, RzBorder, RzLabel,
+  RzDBLbl, Vcl.ExtCtrls, RzPanel,unbase_addedit, Data.DB, Data.Win.ADODB,
+  RzEdit, RzDBEdit, AdvDateTimePicker, AdvDBDateTimePicker, DBCtrlsEh,
+  DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh, EhLibVCL,
+  GridsEh, DBAxisGridsEh, DBGridEh;
+
+type
+  TFrmLeave_AddEdit = class(Tfrmbase_AddEdit)
+    Label1: TLabel;
+    RzDBLabel1: TRzDBLabel;
+    Label21: TLabel;
+    lbl_name: TRzLabel;
+    SpeedButton1: TSpeedButton;
+    Label31: TLabel;
+    DBEdit2: TDBEdit;
+    Label28: TLabel;
+    Label3: TLabel;
+    Label40: TLabel;
+    DBEdit12: TDBEdit;
+    Label41: TLabel;
+    adtLeaveId: TLargeintField;
+    adtPersonId: TIntegerField;
+    adtDeptId: TIntegerField;
+    adtReason: TWideStringField;
+    adtBeginTime: TDateTimeField;
+    adtEndTime: TDateTimeField;
+    adtHourTime: TBCDField;
+    adtOnDate: TDateTimeField;
+    adtLeaveDate: TDateTimeField;
+    DBDateTimeEditEh1: TDBDateTimeEditEh;
+    DBDateTimeEditEh2: TDBDateTimeEditEh;
+    DBDateTimeEditEh3: TDBDateTimeEditEh;
+    pnl_Dept: TRzPanel;
+    Grd: TDBGridEh;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FrmLeave_AddEdit: TFrmLeave_AddEdit;
+
+implementation
+
+{$R *.dfm}
+
+end.

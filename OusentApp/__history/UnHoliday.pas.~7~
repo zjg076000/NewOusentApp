@@ -1,0 +1,50 @@
+unit UnHoliday;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs,unbase_pnl, Vcl.Buttons, RzButton,
+  Vcl.ExtCtrls, RzPanel, Vcl.ComCtrls, RzDTP, RzDBDTP, RzBorder, Vcl.StdCtrls,
+  Vcl.DBCtrls, AdvGlowButton, Vcl.WinXPanels;
+
+type
+  TFrmHoliday = class(Tfrmbase_pnl)
+    RzToolbarButton3: TRzToolbarButton;
+    CardPanel1: TCardPanel;
+    Card1: TCard;
+    Card2: TCard;
+    Label1: TLabel;
+    Edit1: TEdit;
+    btnOk: TAdvGlowButton;
+    AdvGlowButton1: TAdvGlowButton;
+    RzToolbarButton6: TRzToolbarButton;
+    DBRichEdit1: TDBRichEdit;
+    Label2: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    Label5: TLabel;
+    RzBorder1: TRzBorder;
+    RzBorder2: TRzBorder;
+    RzDBDateTimePicker1: TRzDBDateTimePicker;
+    RzDBDateTimePicker2: TRzDBDateTimePicker;
+    procedure RzToolbarButton1Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FrmHoliday: TFrmHoliday;
+
+implementation
+
+{$R *.dfm}
+
+procedure TFrmHoliday.RzToolbarButton1Click(Sender: TObject);
+begin
+  close;
+end;
+
+end.

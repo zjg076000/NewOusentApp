@@ -1,0 +1,84 @@
+unit UnOverTime;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs,unbase_pnl, Vcl.Buttons, RzButton,
+  Vcl.ExtCtrls, RzPanel, MemTableDataEh, Data.DB, DBGridEhGrouping, ToolCtrlsEh,
+  DBGridEhToolCtrls, DynVarsEh, AdvGlowButton, Vcl.ComCtrls, RzDTP,
+  Vcl.StdCtrls, EhLibVCL, GridsEh, DBAxisGridsEh, DBGridEh, MemTableEh,
+  Data.Win.ADODB, DataDriverEh;
+
+type
+  TFrmOvertime = class(Tfrmbase_pnl)
+    dsd: TDataSetDriverEh;
+    adt: TADODataSet;
+    adtPCode: TWideStringField;
+    adtPName: TWideStringField;
+    adtDeptName: TWideStringField;
+    adtPersonId: TIntegerField;
+    adtDeptId: TIntegerField;
+    adtReason: TWideStringField;
+    adtBeginTime: TDateTimeField;
+    adtEndTime: TDateTimeField;
+    adtHourTime: TBCDField;
+    adtOnDate: TDateTimeField;
+    dso: TDataSource;
+    mte: TMemTableEh;
+    Grd: TDBGridEh;
+    pnl_locate: TRzPanel;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    edt_name: TEdit;
+    date_begin: TRzDateTimePicker;
+    date_end: TRzDateTimePicker;
+    btn_OrderNum_Locate: TAdvGlowButton;
+    RzToolbarButton3: TRzToolbarButton;
+    btnEdit: TRzToolbarButton;
+    adtOverTimeId: TLargeintField;
+    adtOvertimeDate: TDateTimeField;
+    RzToolbarButton6: TRzToolbarButton;
+    RzToolbarButton2: TRzToolbarButton;
+    chk_locate: TCheckBox;
+    RzToolbarButton4: TRzToolbarButton;
+    procedure RzToolbarButton3Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FrmOvertime: TFrmOvertime;
+
+implementation
+
+{$R *.dfm}
+
+uses UnOvertime_AddEdit, UnData;
+
+procedure TFrmOvertime.RzToolbarButton3Click(Sender: TObject);
+begin
+  FrmOverTime_AddEdit := tFrmOverTime_AddEdit.create(self);
+  FrmOverTime_AddEdit.Caption := ' ‰»Îº”∞‡º«¬º';
+  FrmOverTime_AddEdit.Psql :=
+    'select top 1 * from Hrm_OverTime order by OverTimeId desc ';
+  dm_Data.proc_ActiveAdodataset(FrmOverTime_AddEdit.adt, FrmOverTime_AddEdit.Psql);
+  FrmOverTime_AddEdit.adt.Append;
+  FrmOverTime_AddEdit.adt.FieldByName('begintime').AsDateTime :=
+    strtodatetime(formatdatetime('yyyy-mm-dd hh:nn', now));
+  FrmOverTime_AddEdit.adt.FieldByName('Endtime').AsDateTime := now;
+
+  IF FrmOverTime_AddEdit.ShowModal = Idok then;
+  begin
+    adt.Requery();
+
+    mte.close;
+    mte.open;
+
+  end;
+end;
+
+end.

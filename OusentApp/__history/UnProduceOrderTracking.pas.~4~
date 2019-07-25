@@ -1,0 +1,24 @@
+unit UnProduceOrderTracking;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs,unbase_pnl;
+
+type
+  TFrmProduceOrderTracking = class(Tfrmbase_pnl)
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FrmProduceOrderTracking: TFrmProduceOrderTracking;
+
+implementation
+
+{$R *.dfm}
+
+end.

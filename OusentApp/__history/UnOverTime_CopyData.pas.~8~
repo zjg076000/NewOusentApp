@@ -1,0 +1,27 @@
+unit UnOverTime_CopyData;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs,unbase_addEdit, Unbase_pnl, Vcl.Buttons,
+  RzButton, Vcl.ExtCtrls, RzPanel, Vcl.StdCtrls, Data.DB, Data.Win.ADODB;
+
+type
+  TFrmOverTime_CopyData = class(Tfrmbase_AddEdit)
+    RzPanel3: TRzPanel;
+    ListBox1: TListBox;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FrmOverTime_CopyData: TFrmOverTime_CopyData;
+
+implementation
+
+{$R *.dfm}
+
+end.

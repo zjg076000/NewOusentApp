@@ -1,0 +1,22 @@
+inherited FrmHoliday: TFrmHoliday
+  Caption = #35831#20551#31649#29702
+  ClientHeight = 385
+  ClientWidth = 409
+  Font.Charset = DEFAULT_CHARSET
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Position = poMainFormCenter
+  ExplicitTop = -4
+  ExplicitWidth = 425
+  ExplicitHeight = 423
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited RzPanel1: TRzPanel
+    Width = 409
+    VisualStyle = vsWinXP
+    ExplicitWidth = 409
+    inherited RzToolbarButton1: TRzToolbarButton
+      Left = 346
+    end
+  end
+end

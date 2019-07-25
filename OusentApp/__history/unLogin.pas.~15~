@@ -1,0 +1,202 @@
+unit unLogin;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, htmlbtns, AdvEdit, AdvOfficeButtons, inifiles,
+  AdvGlowButton, AdvGDIPicture,ActnList, DB, ADODB, AdvSmoothPanel,System.Generics.Collections;
+
+type
+  TfrmLogin = class(TForm)
+    adq: TADOQuery;
+    adq2: TADOQuery;
+    AdvSmoothPanel3: TAdvSmoothPanel;
+    edt_User: TAdvEdit;
+    edt_Pass: TAdvEdit;
+    chk: TAdvOfficeCheckBox;
+    btnOk: TAdvGlowButton;
+    btnExit: TAdvGlowButton;
+    procedure Button1Click(Sender: TObject);
+    procedure btnExitClick(Sender: TObject);
+    procedure btnOkClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+  private
+     sql:string;
+  public
+     user_code,user_name,dept_name,begin_time,posi,ip_address,mokuai_name,end_time:string;
+    function Login: Boolean;  //登录函数
+    function  proc_Loginok:boolean;
+    // 取得角色和部门的权限条件字符串
+   function getuser_if (str_tablename:String;str_fieldname:string;uid:string):string;
+
+  end;
+
+var
+  frmLogin: TfrmLogin;
+
+implementation
+    uses unmain, UnData;
+{$R *.dfm}
+procedure TfrmLogin.btnOkClick(Sender: TObject);
+begin
+     //如果通过检查，返回OK
+   if proc_Loginok=true then
+
+   Self.ModalResult := mrOk;
+end;
+function tfrmLogin.proc_Loginok:boolean;
+var
+  i:integer;
+  t_Action:TAction;
+  uid:integer;
+  str_user_if,str_Dept_if,str_Role_if:String;
+  strsql:string;
+   str_if:string;
+  p:DWORD;
+
+   RoleId,UserId:string;
+
+   IsUser:BOOL;
+
+begin
+ try
+
+
+    if ( edt_user.text='SYSTEM' ) AND  ( edt_Pass.text='MANAGER' ) Then
+     BEGIN
+         // frmmain.lbl_User.Caption:='用户名:  SYSTEM '+'【 系统管理员 】';
+         frmlogin.visible:=false;
+           frmlogin.refresh;
+         frmmain:=TFrmMain.Create(Self);
+
+        Result:=True;
+
+        frmmain.showmodal;
+
+        EXIT;
+     END;
+
+
+    with adq do
+  begin
+    Close;
+    sql.text:= 'select * from  Sys_User ' +
+      'where UserCode = ''' + edt_user.Text + ''' and PassWord='''+edt_Pass.Text+'''';
+    Open;
+
+    if adq.RecordCount>0    then   isUser:=True;
+
+    if isUser=True then
+    begin
+          //得到用户ID
+          UserId:=ADQ.FieldByName('Id').AsString;
+
+           frmmain:=TFrmMain.Create(Self);
+          //1.查询用户列表 的权限  加入到权限列表中
+           frmmain.FormRightList:=TList<Integer>.Create;
+          //2.取得用户权限表
+            strsql:='select * from Sys_UserFormRight where UserId='+UserId;
+            dm_DaTa.QuseryData(adq,strsql);
+
+            while not adq.Eof  do
+            begin
+             frmmain.FormRightList.Add(adq.FieldByName('FormId').asinteger);
+             adq.next;
+            end;
+
+
+         //3.角色用户权限
+            strsql:='select * from Sys_UserRole where UserId='+UserId;
+            //取得用户角色
+            dm_DaTa.QuseryData(adq,strsql);
+            RoleId:='';
+            while not  adq.Eof  do
+            begin
+               if RoleId>'' then
+                 RoleId:=RoleId+','+adq.FieldByName('RoleId').AsString;
+               adq.Next;
+            end;
+
+            if RoleId>'' then
+            begin
+               strsql:='select a.* from Sys_RoleFormRight a  inner join  Sys_Role b '
+                    +' on  a.RoleId=b.Id  and a.RoleId in ('+RoleId+')';
+               dm_DaTa.QuseryData(adq,strsql);
+               while not adq.Eof  do
+                begin
+                  //不加重复权限
+                  if frmmain.FormRightList.Contains(adq.FieldByName('FormId').asinteger)=false then
+                    frmmain.FormRightList.Add(adq.FieldByName('FormId').asinteger);
+                  adq.next;
+                end;
+             end;
+
+            Result:=True;
+
+           frMMain.showmodal;
+
+     end
+
+     else
+      begin
+          Application.Messagebox('无效的用户代码,请重新输入!', '系统登录', MB_OK+MB_ICONERROR);
+         edt_user.Tag := edt_user.Tag + 1;
+          edt_user.SetFocus;
+         Result:=false;
+      end;
+
+   
+
+
+end;
+procedure TfrmLogin.btnExitClick(Sender: TObject);
+begin
+    Self.ModalResult := mrCancel;
+    // application.Terminate;
+end;
+
+procedure TfrmLogin.Button1Click(Sender: TObject);
+begin
+
+   //  close();
+end;
+
+procedure TfrmLogin.FormCreate(Sender: TObject);
+begin
+ //  edt_user.Text:=dm_data.ReadIni('UserInfo','login_user');
+  // edt_pass.Text:=dm_data.ReadIni('UserInfo','login_password');
+end;
+
+// 取得角色和部门的权限条件字符串
+function Tfrmlogin.getuser_if (str_tablename:String;str_fieldname:string;uid:string):string;
+var
+   str:string;
+begin
+    with adq2 do
+    begin
+     Close;
+     SQL.Text:='select * from '+str_tablename+' where uid='+uid;
+     open;
+     while not eof do
+     begin
+        if str='' then
+          str:=str_fieldname+'='+fieldbyname(str_fieldname).asstring
+        else
+          str:=str+ 'and '+str_fieldname+'='+fieldbyname(str_fieldname).asstring;
+         next;
+     end;
+     Result:=str;
+
+    end;
+end;
+
+function TfrmLogin.Login: Boolean;
+begin  //动态创建登录窗口
+ with TfrmLogin.Create(nil) do
+  begin  //只有返回OK的时候认为登录成功
+   Result := ShowModal() = mrOk;
+   Free;
+ end;
+end;
+end.

@@ -1,0 +1,32 @@
+unit UnLeaveType;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs,Unbase_pnl, MemTableDataEh, Data.DB,
+  DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh, EhLibVCL,
+  GridsEh, DBAxisGridsEh, DBGridEh, DataDriverEh, MemTableEh, Data.Win.ADODB,
+  Vcl.Buttons, RzButton, Vcl.ExtCtrls, RzPanel;
+
+type
+  TFrmLeaveType = class(Tfrmbase_pnl)
+    adt: TADODataSet;
+    ds: TDataSource;
+    mte: TMemTableEh;
+    dsd: TDataSetDriverEh;
+    Grd: TDBGridEh;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FrmLeaveType: TFrmLeaveType;
+
+implementation
+
+{$R *.dfm}
+
+end.

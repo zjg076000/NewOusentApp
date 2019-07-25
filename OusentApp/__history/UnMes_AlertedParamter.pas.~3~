@@ -1,0 +1,32 @@
+unit UnMes_AlertedParamter;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs,Unbase_pnl, Vcl.Buttons, RzButton,
+  Vcl.ExtCtrls, RzPanel, Vcl.WinXCtrls, Vcl.StdCtrls;
+
+type
+  TFrmMes_AlertedParater = class(Tfrmbase_pnl)
+    RzPanel2: TRzPanel;
+    Label1: TLabel;
+    ComboBox1: TComboBox;
+    Label2: TLabel;
+    ToggleSwitch1: TToggleSwitch;
+    Label3: TLabel;
+    ToggleSwitch2: TToggleSwitch;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FrmMes_AlertedParater: TFrmMes_AlertedParater;
+
+implementation
+
+{$R *.dfm}
+
+end.

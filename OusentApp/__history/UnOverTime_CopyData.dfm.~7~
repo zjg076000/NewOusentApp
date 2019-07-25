@@ -1,0 +1,64 @@
+inherited FrmOverTime_CopyData: TFrmOverTime_CopyData
+  Caption = 'FrmOverTime_CopyData'
+  ClientHeight = 383
+  ClientWidth = 501
+  Font.Charset = DEFAULT_CHARSET
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  ExplicitWidth = 517
+  ExplicitHeight = 421
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited RzPanel1: TRzPanel
+    Width = 501
+    ExplicitWidth = 463
+  end
+  inherited RzPanel4: TRzPanel
+    Top = 342
+    Width = 501
+    ExplicitTop = 342
+    ExplicitWidth = 463
+    inherited btnSaveAdd: TSpeedButton
+      Left = 228
+      Top = 7
+      ExplicitLeft = 228
+      ExplicitTop = 7
+    end
+    inherited btnSave: TSpeedButton
+      Left = 311
+      Top = 7
+      ExplicitLeft = 311
+      ExplicitTop = 7
+    end
+    inherited btnCancel: TSpeedButton
+      Left = 395
+      Top = 7
+      ExplicitLeft = 395
+      ExplicitTop = 7
+    end
+  end
+  inherited RzPanel2: TRzPanel
+    Width = 501
+    Height = 308
+    ExplicitWidth = 463
+    ExplicitHeight = 308
+    object RzPanel3: TRzPanel
+      Left = 6
+      Top = 6
+      Width = 147
+      Height = 296
+      BorderOuter = fsFlat
+      TabOrder = 0
+      object ListBox1: TListBox
+        Left = 1
+        Top = 1
+        Width = 145
+        Height = 294
+        Align = alClient
+        BorderStyle = bsNone
+        ItemHeight = 13
+        TabOrder = 0
+      end
+    end
+  end
+end

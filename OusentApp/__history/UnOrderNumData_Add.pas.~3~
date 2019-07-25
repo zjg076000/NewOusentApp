@@ -1,0 +1,24 @@
+unit UnOrderNumData_Add;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs;
+
+type
+  TFrmOrderNumData_Add = class(TForm)
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FrmOrderNumData_Add: TFrmOrderNumData_Add;
+
+implementation
+
+{$R *.dfm}
+
+end.

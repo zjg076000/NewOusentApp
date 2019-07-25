@@ -1,0 +1,411 @@
+unit UnOverTimeOrLeave_MonthCount;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs,unbase_pnl, Vcl.Buttons, RzButton,
+  Vcl.ExtCtrls, RzPanel, DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls,
+  DynVarsEh, EhLibVCL, GridsEh, DBAxisGridsEh, DBGridEh, AdvGlowButton,
+  Vcl.ComCtrls, RzDTP, Vcl.StdCtrls,System.Generics.Collections, Data.DB,
+  Data.Win.ADODB, Vcl.CheckLst, MemTableDataEh, MemTableEh, Datasnap.DBClient,
+  Vcl.Grids, Vcl.DBGrids, DataDriverEh;
+
+type
+  TFrmOverTimeOrLeave_MonthCount = class(Tfrmbase_pnl)
+    pnl_locate: TRzPanel;
+    date_begin: TRzDateTimePicker;
+    btn_OrderNum_Locate: TAdvGlowButton;
+    Grd: TDBGridEh;
+    AdvGlowButton1: TAdvGlowButton;
+    AdvGlowButton5: TAdvGlowButton;
+    RzToolbarButton11: TRzToolbarButton;
+    RzToolbarButton2: TRzToolbarButton;
+    qry: TADOQuery;
+    AdvGlowButton2: TAdvGlowButton;
+    RzToolbarButton3: TRzToolbarButton;
+    AdvGlowButton3: TAdvGlowButton;
+    Adt_Person: TADODataSet;
+    ds_TypeData: TDataSource;
+    cdt_TypeData: TClientDataSet;
+    intgrfld_TypeDataTypeId: TIntegerField;
+    strngfld_TypeDataName: TStringField;
+    strngfld_TypeDataTableName: TStringField;
+    adt_MonthCount: TADODataSet;
+    ds_monthcount: TDataSource;
+    dsd_MonthCount: TDataSetDriverEh;
+    mte_MonthCount: TMemTableEh;
+    Label1: TLabel;
+    procedure btn_OrderNum_LocateClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure AdvGlowButton3Click(Sender: TObject);
+    procedure AdvGlowButton2Click(Sender: TObject);
+  private
+
+    Sql:string;
+    listType:TList<string>;
+
+    procedure  Proc_Locate(str_Month:string);
+
+    procedure AddHeaderData;    //增加头数据
+
+    procedure AddTypeToList(qry:TADOQuery;strsql,TableName:String);
+
+
+
+    function AddData(cdt_TypeData:TClientDataSet;str_Month:string): boolean;
+
+    //生成批量统计数据
+    procedure  Proc_BatchData;
+  public
+
+  end;
+
+var
+  FrmOverTimeOrLeave_MonthCount: TFrmOverTimeOrLeave_MonthCount;
+      strsql:string;
+implementation
+
+  uses UnData;
+
+
+{$R *.dfm}
+
+function TFrmOverTimeOrLeave_MonthCount.AddData(cdt_TypeData:TClientDataSet;str_Month:string): boolean;
+var
+    str,str_value,colname,colvalue,colcount:string;
+    i,col_count,CountField_Index,Count_TypeId:Integer;     // col_count:统计的项数，CountField_Index：统计字段的索引值
+    PersonId,DeptId:Integer;
+    LeaveData_Count,OvertimeData_Count:Real;
+    datebegin:string;
+begin
+
+     datebegin:=FormatDateTime('yyyy-mm',date_begin.DateTime);
+     if cdt_TypeData.RecordCount=0  then     Exit;
+
+    if Adt_Person.RecordCount=0 then  Exit;
+     Adt_Person.First;
+     while not Adt_Person.Eof  do
+     begin
+        PersonId:=Adt_Person.FieldByName('PersonId').AsInteger;
+        DeptId:=Adt_Person.FieldByName('DeptId').AsInteger;
+     cdt_TypeData.First;
+     //1.取得统计的项数
+      col_count:=cdt_TypeData.RecordCount;
+      str:='insert into  Hrm_OverTimeOrLeave_MonthCount(';
+
+      //'''+datebegin+''''+','+IntToStr(PersonId)
+         //  +','+IntToStr(DeptId)+',';
+
+     //1.根据cdt_typedata.记录数  产生SQL语句的 前半段
+       for I := 1 to col_count do
+       begin
+       // if colname='' then
+           //  colname:='TD01'
+        //else
+       //  begin
+             if i<10 then
+
+             colname:=colname+','+'TD0'+IntToStr(i)
+             else
+               colname:=colname+','+'TD'+IntToStr(i);
+        // end;
+
+        //     if
+           cdt_TypeData.MoveBy(i);
+         //   SHOWMESSAGE(cdt_TypeData.FieldByName('TableName').AsString);
+          if cdt_TypeData.FieldByName('TableName').AsString='Hrm_LeaveType' then
+            PSQL:='Select sum(HourTime) num from Hrm_Leave where PersonId='+IntToStr(PersonId)
+                +' and Convert(varchar(7),BeginTime,120) >='''+ datebegin + ''' and '
+                +' LeaveType='+cdt_TypeData.FieldByName('TypeId').asstring
+           ELSE
+            PSQL:='Select sum(HourTime) num from Hrm_OverTime where PersonId='+IntToStr(PersonId)
+                +' and Convert(varchar(7),BeginTime,120) >='''+ datebegin + ''' and '
+                +' OvertimeType='+cdt_TypeData.FieldByName('TypeId').asstring ;
+
+            dm_DaTa.QuseryData(qry,Psql);
+             colcount :=FloatToStr(qry.FieldByName('num').asfloat);
+
+            if colcount='' then    colcount:='0';
+          if i=1 then
+
+
+             colvalue:=','+colcount
+        else
+            colvalue:=colvalue+','+colcount ;
+
+         end;
+
+     str:='insert into  Hrm_OverTimeOrLeave_MonthCount(ComputeMonth,PersonId,DeptId'+colname+') ' ;
+     str_value:=' values('''+datebegin+''''+','+IntToStr(PersonId)+','+IntToStr(DeptId)+colvalue+')';
+
+ //   Sql:=str+str_value;
+
+
+      if Sql=''  then
+
+       Sql:=str+str_value
+      else
+
+      Sql:=Sql+' '+str+str_value;;
+
+    //再次初始化
+     colname:='';
+     colvalue:='';
+       Adt_Person.Next;
+
+
+    end;
+
+
+
+
+   //  ShowMessage(Sql) ;
+      // colvalue
+    // ShowMessage(str);
+        // InsertSql:=InsertSql+
+       {
+      //2. 生成插入值
+
+
+
+     while not  cdt_TypeData.Eof do
+        begin
+
+
+            //2.取得统计的列名
+            colname:=cdt_TypeData.FieldByName('Name').asstring;
+            Count_TypeId:=cdt_TypeData.FieldByName('TypeId').asinteger;
+            //3.根据列名称 查询 请假类别表和加班类别表 ，取得类别ID
+             Psql:='select * from   Hrm_OvertimeType where name='''+colname+'''';
+         //   dm_DaTa.QuseryData(qry,Psql);
+            //统计字段索引值
+            CountField_Index:=i+3;//从
+
+            if qry.RecordCount=0 then        //如果请假类别中没有，查找加班类别
+            begin
+               Psql:='select * from   Hrm_OvertimeType where name='''+colname+'''';
+               dm_DaTa.QuseryData(qry,Psql);
+               if qry.RecordCount=0  then  exit     //如果两个类别没有不进行统计
+               else       //根据加班类别找到加班ID 统计员工的加班数据
+                begin
+                  Count_TypeId:=qry.FieldbyName('Id').asinteger;
+                  //按每个员工统计
+                  if Adt_Person.RecordCount=0 then Exit;    //没有员工不进行统计
+
+                  while not Adt_Person.Eof  do
+                  begin
+                    PersonId:=Adt_Person.FieldByName('PersonId').asinteger;
+                    //统计改员工该月份的请假数据
+                     psql:='select sum(HourTime) num from  Hrm_Leave where '
+                      +'(Convert(varchar(7),a.BeginTime,120) >='''+ datebegin + ''' and PersonId='+IntToStr(PersonId);
+                     dm_DaTa.QuseryData(qry,psql);
+
+
+
+                    // dm_DaTa.qry
+                    // LeaveData_Count
+
+                  end;
+
+
+
+
+                end;
+
+
+
+            end
+            else      //根据请假类别ID 统计员工请假的数据
+            begin
+
+            end;
+
+
+
+
+
+
+
+            str:='  insert into Hrm_Hrm_OverTimeOrLeave_MonthCount_DataCol('
+                +'ComputeMonth,ColName) values('''+str_Month+''','''+colname+''')' ;
+            InsertSql:=InsertSql+str;
+
+
+       end;    }
+      Proc_BatchData;
+     result:=True;
+end;
+
+//end;
+
+procedure TFrmOverTimeOrLeave_MonthCount.AddHeaderData;
+var
+   i:Integer;
+begin
+   // listType:=TList<string>.Create;
+  //  DictTypeData:=TDictionary<integer,string>.Create;
+     cdt_TypeData.EmptyDataSet;
+    //1.增加请假类别
+    psql:='select * From Hrm_LeaveType';
+    AddTypeToList(qry,psql,'Hrm_LeaveType');
+    Psql:='select * from Hrm_OvertimeType';
+    AddTypeToList(qry,psql,'Hrm_OvertimeType');
+
+   // for i:=0 to listType.Count-1 do
+   // ListBox1.items.Add(listType[i]);
+
+
+end;
+
+
+
+
+
+procedure TFrmOverTimeOrLeave_MonthCount.AddTypeToList(qry: TADOQuery;strsql,TableName:string);
+begin
+     dm_DaTa.QuseryData(qry,strsql);
+      with qry do
+       begin
+         while not Eof  do
+          begin
+            //生成insert sql语句
+          //  listType.Add(FieldByName('name').AsString);
+            cdt_TypeData.Append;
+
+            cdt_TypeData.FieldByName('TypeId').asinteger:=FieldByName('TypeId').asinteger;
+            cdt_TypeData.FieldByName('Name').asstring:=FieldByName('Name').asstring;
+             cdt_TypeData.FieldByName('TableName').asstring:=TableName;
+
+            cdt_TypeData.Post;
+           // ListBox1.Items.Text:=DictTypeData.Keys+':'+DictTypeData.Values;
+            Next;
+          end;
+       end;
+end;
+
+procedure TFrmOverTimeOrLeave_MonthCount.AdvGlowButton2Click(Sender: TObject);
+var
+  datebegin: string;
+begin
+ datebegin:=formatdatetime('yyyy-MM',date_begin.DateTime);
+  IF   application.MessageBox('你确定要删除该月统计数据吗？','提示',MB_OKCANCEL
+)=1 then
+   begin
+      psql:='delete from  Hrm_OverTimeOrLeave_MonthCount '
+          +' WHERE  Convert(varchar(7),a.ComputeMonth,120) ='''+ datebegin + ''' ' ;
+      dm_Data.Execsql(qry,psql);
+      showmessage('删除成功！');
+   end;
+
+end;
+
+procedure TFrmOverTimeOrLeave_MonthCount.AdvGlowButton3Click(Sender: TObject);
+BEGIN
+  //批量加载统计数据
+  IF   application.MessageBox('你确定要统计该月请假加班数据吗？','提示',MB_OKCANCEL
+)=1 then
+   begin
+
+  AddData(cdt_TypeData,FormatDateTime('yyyy-MM',date_begin.DateTime));
+   end;
+end;
+
+procedure TFrmOverTimeOrLeave_MonthCount.btn_OrderNum_LocateClick(
+  Sender: TObject);
+ var
+   i:Integer;
+begin
+
+  //1.加载头数据
+  AddHeaderData;
+  //for I := Low to High do
+  cdt_TypeData.First;
+  for I := 3 to 14 do
+     Grd.Columns[i].Visible:=false;
+
+  i:=3;
+  while NOT cdt_TypeData.EOF do
+  begin
+     Grd.Columns[i].Title.Caption:=cdt_TypeData.FieldByName('Name').AsString;
+     Grd.Columns[i].Visible:=True;
+     i:=i+1;
+     cdt_TypeData.Next;
+  end;
+
+  Proc_Locate(formatdatetime('yyyy-MM',date_begin.DateTime));
+
+end;
+procedure TFrmOverTimeOrLeave_MonthCount.FormCreate(Sender: TObject);
+begin
+ // inherited;
+  cdt_TypeData.CreateDataSet;
+   cdt_TypeData.Active:=True;
+ // cdt_TypeData.CreateDataSet;
+
+end;
+
+procedure  TFrmOverTimeOrLeave_MonthCount.Proc_BatchData;
+var I,x:integer;
+    SqlStr,MsgStr:string;
+    ID,Name:string;
+    Time:Cardinal;
+begin
+
+  // 一次插入1万条数据 耗时大约4秒
+ // Time:=GetTickCount;
+
+  //1.生成月统计时有哪些数据项要统计数据
+
+
+
+ { while not Adt_Person.eof  do
+  begin
+      PersonId:=Adt_Person.FieldByName('PersonId').AsInteger;
+      DeptId:=Adt_Person.FieldByName('DeptId').AsInteger;
+
+    SqlStr:=SqlStr+'   insert into Hrm_OverTime(PersonId,DeptId,OvertimeType,'
+                  +'Reason,BeginTime,EndTime,OvertimeDate,HourTime) values('+IntToStr(PersonId)
+                  +','+IntToStr(DeptId)+','+IntToStr(OvertimeType)+',+'''+Reason+''', '
+                  +''''+BeginTime+''','''+EndTime+''','''+OverTimeDate+''','+HourTime+')';
+
+     Adt_Person.Next;
+  end;             }
+
+
+//  showmessage(SqlStr);
+  dm_Data.adoconn.BeginTrans;
+  dm_Data.ADOCommand.CommandText:=Sql;
+ // showmessage(SqlStr);
+  dm_Data.ADOCommand.Execute();
+  dm_Data.adoconn.CommitTrans;
+ end;
+procedure TFrmOverTimeOrLeave_MonthCount.Proc_Locate(str_Month: string);
+var
+  datebegin, dateend: String;
+  workstate: integer;
+begin
+  datebegin := formatdatetime('yyyy-MM', date_begin.Date);
+
+  Psql := 'select   c.PCode,c.PName,b.DeptName,a.*  FROM Hrm_OverTimeOrLeave_MonthCount a '
+         +' left   join   Hrm_Dept b   on   a.DeptId=b.DeptId '
+         +' left   join   Hrm_Person c   on   a.PersonId=c.PersonId '
+         +' WHERE  Convert(varchar(7),a.ComputeMonth,120) ='''+ datebegin + ''' ' ;
+
+
+  with adt_MonthCount do
+  begin
+    close;
+    commandtext:=Psql;
+    open;
+  end;
+
+    Mte_MonthCount.close;
+    Mte_MonthCount.open;
+
+
+
+end;
+
+end.
+

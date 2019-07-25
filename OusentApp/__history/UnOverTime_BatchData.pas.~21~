@@ -1,0 +1,185 @@
+unit UnOverTime_BatchData;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs,unbase_addEdit, Unbase_pnl, Vcl.Buttons,
+  RzButton, Vcl.ExtCtrls, RzPanel, Vcl.StdCtrls, Data.DB, Data.Win.ADODB,
+  DBCtrlsEh, Vcl.DBCtrls, Vcl.Mask, RzLabel, RzDBLbl, RzEdit, Vcl.ComCtrls,
+  RzDBCmbo, DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh,
+  EhLibVCL, GridsEh, DBAxisGridsEh, DBGridEh, AdvOfficeImage;
+
+type
+  TFrmOverTime_BatchData = class(TFrmBase_AddEdit)
+    RzPanel3: TRzPanel;
+    RzPanel6: TRzPanel;
+    SpeedButton1: TSpeedButton;
+    lbl2: TLabel;
+    lbl3: TLabel;
+    rzpnl1: TRzPanel;
+    Label4: TLabel;
+    mmo_Personlist: TRzMemo;
+    Label31: TLabel;
+    mmo_rease: TRzMemo;
+    Label1: TLabel;
+    cbb_Type: TRzDBLookupComboBox;
+    Label28: TLabel;
+    dtp_begintime: TDateTimePicker;
+    Label3: TLabel;
+    dtp_endtime: TDateTimePicker;
+    Label40: TLabel;
+    Label41: TLabel;
+    dtp_overtimeDate: TDateTimePicker;
+    lbl1: TLabel;
+    chk: TCheckBox;
+    AdvOfficeImage1: TAdvOfficeImage;
+    Adt_Person: TADODataSet;
+    dso_Person: TDataSource;
+    edt_Name: TEdit;
+    RzPanel5: TRzPanel;
+    GRD: TDBGridEh;
+    Adt_OverTimeType: TADODataSet;
+    dso_OvertimeType: TDataSource;
+    edt_Hour: TMaskEdit;
+    procedure GRDDblClick(Sender: TObject);
+    procedure chkClick(Sender: TObject);
+    procedure edt_NameChange(Sender: TObject);
+    procedure SpeedButton1Click(Sender: TObject);
+    procedure btnSaveClick(Sender: TObject);
+  private
+    procedure SelectData;
+    procedure  Proc_BatchData(PersonId,DeptId,OvertimeType:Integer;
+           Reason,BeginTime,EndTime,OverTimeDate,HourTime:string);
+  public
+    { Public declarations }
+  end;
+
+var
+  FrmOverTime_BatchData: TFrmOverTime_BatchData;
+
+implementation
+    uses UnData;
+{$R *.dfm}
+
+procedure TFrmOverTime_BatchData.btnSaveClick(Sender: TObject);
+var
+  PersonId,DeptId,OvertimeType:Integer;
+           Reason,BeginTime,EndTime,OverTimeDate,HourTime:string;
+begin
+   // RecordNum:=Adt_Person.RecordCount;//记录条数
+  if Adt_Person.RecordCount=0 then
+    begin
+       ShowMessage('你没有选择人员');
+       Exit;
+    end;
+
+  Adt_Person.First;
+  PersonId:=Adt_Person.FieldByName('PersonId').AsInteger;
+  DeptId:=Adt_Person.FieldByName('DeptId').AsInteger;
+  OvertimeType:=cbb_Type.KeyValue;
+
+  Reason:=mmo_rease.Lines.Text;
+  BeginTime:=FormatDateTime('yyyy-MM-dd HH:mm',dtp_begintime.DateTime);
+  EndTime:=FormatDateTime('yyyy-MM-dd HH:mm',dtp_endtime.DateTime);
+  OverTimeDate:=FormatDateTime('yyyy-MM-dd HH:mm',dtp_overtimeDate.DateTime);
+  HourTime:=strtofloat(floattostr(edt_Hour.Text));
+
+
+  Proc_BatchData(PersonId,DeptId,OvertimeType,Reason,BeginTime,EndTime,OverTimeDate,HourTime);
+  Close;
+  end;
+
+procedure TFrmOverTime_BatchData.chkClick(Sender: TObject);
+
+begin
+  SelectData;
+
+end;
+
+procedure TFrmOverTime_BatchData.edt_NameChange(Sender: TObject);
+
+begin
+   dm_DaTa.FilerData(edt_Name.Text,'Hrm_Person','PName',Adt_Person);
+
+
+end;
+
+procedure TFrmOverTime_BatchData.GRDDblClick(Sender: TObject);
+begin
+ if Adt_Person.RecordCount=0 then  Exit;
+
+    Adt_Person.EDIT;
+  if Adt_Person.FieldByName('IsSelect').AsBoolean = true then
+    Adt_Person.FieldByName('IsSelect').AsBoolean := FALSE
+  else
+   Adt_Person.FieldByName('IsSelect').AsBoolean := true;
+
+
+end;
+
+procedure TFrmOverTime_BatchData.SpeedButton1Click(Sender: TObject);
+begin
+ mmo_Personlist.Lines.Clear;
+ chk.Checked:=True;
+ SelectData;
+ if Adt_Person.RecordCount=0 then  Exit;
+
+ Adt_Person.First;
+ while not   Adt_Person.Eof  do
+  begin
+   if mmo_Personlist.Lines.text='' then
+    mmo_Personlist.Lines.text:=Adt_Person.FieldByName('PName').AsString
+   else
+    mmo_Personlist.Lines.text:=mmo_Personlist.Lines.text+','+Adt_Person.FieldByName('PName').AsString;
+   Adt_Person.Next;
+ end
+end;
+
+procedure TFrmOverTime_BatchData.SelectData;
+begin
+  with Adt_Person do
+  begin
+    Close;
+    if chk.Checked = false then
+      commandtext := 'select * from Hrm_Person '
+    else
+      commandtext := 'select * from Hrm_Person where IsSelect=1 ';
+    Open;
+  end;
+end;
+procedure  TFrmOverTime_BatchData.Proc_BatchData(PersonId,DeptId,OvertimeType:Integer;
+           Reason,BeginTime,EndTime,OverTimeDate,HourTime:string);
+var I,x:integer;
+    SqlStr,MsgStr:string;
+    ID,Name:string;
+    Time:Cardinal;
+begin
+
+  // 一次插入1万条数据 耗时大约4秒
+ // Time:=GetTickCount;
+
+
+
+  while not Adt_Person.eof  do
+  begin
+      PersonId:=Adt_Person.FieldByName('PersonId').AsInteger;
+      DeptId:=Adt_Person.FieldByName('DeptId').AsInteger;
+
+    SqlStr:=SqlStr+'   insert into Hrm_OverTime(PersonId,DeptId,OvertimeType,'
+                  +'Reason,BeginTime,EndTime,OvertimeDate,HourTime) values('+IntToStr(PersonId)
+                  +','+IntToStr(DeptId)+','+IntToStr(OvertimeType)+',+'''+Reason+''', '
+                  +''''+BeginTime+''','''+EndTime+''','''+OverTimeDate+''','+HourTime+')';
+
+     Adt_Person.Next;
+  end;
+
+
+//  showmessage(SqlStr);
+  dm_Data.adoconn.BeginTrans;
+  dm_Data.ADOCommand.CommandText:=SqlStr;
+  showmessage(SqlStr);
+  dm_Data.ADOCommand.Execute();
+  dm_Data.adoconn.CommitTrans;
+ end;
+end.

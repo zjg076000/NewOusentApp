@@ -1,0 +1,84 @@
+inherited FrmMes_AlertedParater: TFrmMes_AlertedParater
+  Caption = #31995#32479#39044#35686#21442#25968#35774#32622
+  ClientHeight = 419
+  ClientWidth = 454
+  Font.Charset = DEFAULT_CHARSET
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  ExplicitWidth = 470
+  ExplicitHeight = 457
+  PixelsPerInch = 96
+  TextHeight = 13
+  object RzPanel2: TRzPanel [0]
+    Left = 0
+    Top = 28
+    Width = 454
+    Height = 165
+    Align = alTop
+    BorderOuter = fsFlat
+    BorderSides = [sdBottom]
+    Ctl3D = False
+    ParentCtl3D = False
+    TabOrder = 0
+    object Label1: TLabel
+      Left = 24
+      Top = 20
+      Width = 48
+      Height = 13
+      Caption = #20135#21697#22411#21495
+    end
+    object Label2: TLabel
+      Left = 24
+      Top = 66
+      Width = 48
+      Height = 13
+      Caption = #39044#35686#24320#21551
+    end
+    object Label3: TLabel
+      Left = 24
+      Top = 104
+      Width = 48
+      Height = 13
+      Caption = #20572#32447#24320#21551
+    end
+    object ComboBox1: TComboBox
+      Left = 88
+      Top = 16
+      Width = 153
+      Height = 21
+      BevelEdges = [beRight, beBottom]
+      BevelKind = bkFlat
+      Ctl3D = True
+      ParentCtl3D = False
+      TabOrder = 0
+      Text = 'OS-SP12-3110D'
+    end
+    object ToggleSwitch1: TToggleSwitch
+      Left = 88
+      Top = 64
+      Width = 72
+      Height = 20
+      FrameColor = clSilver
+      TabOrder = 1
+      ThumbColor = clYellow
+    end
+  end
+  inherited RzPanel1: TRzPanel
+    Width = 454
+    TabOrder = 1
+    VisualStyle = vsWinXP
+    ExplicitWidth = 454
+    inherited RzToolbarButton1: TRzToolbarButton
+      Left = 391
+    end
+  end
+  object ToggleSwitch2: TToggleSwitch
+    Left = 88
+    Top = 128
+    Width = 72
+    Height = 20
+    FrameColor = clSilver
+    TabOrder = 2
+    ThumbColor = clFuchsia
+  end
+end

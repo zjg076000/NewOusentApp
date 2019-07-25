@@ -1,0 +1,52 @@
+inherited FrmOvertimeType: TFrmOvertimeType
+  BorderIcons = [biSystemMenu]
+  Caption = #35831#20551#31867#22411
+  ClientHeight = 373
+  ClientWidth = 198
+  Font.Charset = DEFAULT_CHARSET
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Position = poDesktopCenter
+  ExplicitWidth = 214
+  ExplicitHeight = 411
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited RzPanel1: TRzPanel
+    Width = 198
+    GradientDirection = gdVerticalEnd
+    ExplicitWidth = 281
+    inherited RzToolbarButton1: TRzToolbarButton
+      Left = 135
+    end
+  end
+  object Grd: TDBGridEh
+    Left = 0
+    Top = 28
+    Width = 198
+    Height = 345
+    Align = alClient
+    BorderStyle = bsNone
+    Ctl3D = True
+    DataSource = dm_DaTa.dso_Paramter
+    DynProps = <>
+    Flat = True
+    ParentCtl3D = False
+    ReadOnly = True
+    RowHeight = 20
+    TabOrder = 1
+    TitleParams.HorzLines = True
+    TitleParams.RowHeight = 20
+    Columns = <
+      item
+        CellButtons = <>
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'TitleValue'
+        Footers = <>
+        Title.Caption = #35831#20551#31867#21035
+        Width = 162
+      end>
+    object RowDetailData: TRowDetailPanelControlEh
+    end
+  end
+end

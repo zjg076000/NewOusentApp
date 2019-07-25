@@ -1,0 +1,228 @@
+unit UnMain;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, System.ImageList,
+  Vcl.ImgList, AdvSmoothLabel, Data.DB, Data.Win.ADODB;
+
+type
+  TFrmMain = class(TForm)
+    TrayIcon1: TTrayIcon;
+    Timer1: TTimer;
+    qry: TADOQuery;
+    qry_erp: TADOQuery;
+    qry_old2: TADOQuery;
+    qry_old: TADOQuery;
+    advsmthlbl1: TAdvSmoothLabel;
+    lbl_Record: TAdvSmoothLabel;
+    Timer2: TTimer;
+    procedure TrayIcon1DblClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure ApplicationEvents1Minimize(Sender: TObject);
+    procedure   WMSysCommand(var   Msg:TMessage);message   WM_SYSCOMMAND;
+    procedure Timer1Timer(Sender: TObject);
+    procedure Timer2Timer(Sender: TObject);
+  private
+    psql:string;
+    procedure Proc_DataAdd;
+  public
+    { Public declarations }
+  end;
+
+var
+  FrmMain: TFrmMain;
+
+implementation
+   uses UnData;
+{$R *.dfm}
+procedure TFrmMain.ApplicationEvents1Minimize(Sender: TObject);
+begin
+  { Hide the window and set its state variable to wsMinimized. }
+ // if True then
+
+
+  Hide();
+  WindowState := wsMinimized;
+
+  { Show the animated tray icon and also a hint balloon. }
+  TrayIcon1.Visible := True;
+  TrayIcon1.Animate := True;
+  TrayIcon1.ShowBalloonHint;
+end;
+
+procedure   TFrmMain.WMSysCommand(var   Msg:   TMessage);
+begin
+    case   Msg.WParam   of
+        SC_MINIMIZE   :
+        BEGIN
+               Hide();
+              WindowState := wsMinimized;
+
+              { Show the animated tray icon and also a hint balloon. }
+              TrayIcon1.Visible := True;
+              TrayIcon1.Animate := True;
+              TrayIcon1.ShowBalloonHint;
+        END;
+      //  SC_MAXIMIZE   :   ShowMessage( '最大化 ');
+    end;
+    inherited;
+end;
+
+procedure TFrmMain.FormCreate(Sender: TObject);
+var
+  MyIcon : TIcon;
+begin
+
+  { Load the tray icons. }
+ { TrayIcon1.Icons := TImageList.Create(Self);
+  MyIcon := TIcon.Create;
+  MyIcon.LoadFromFile('icons/earth1.ico');
+  TrayIcon1.Icon.Assign(MyIcon);
+  TrayIcon1.Icons.AddIcon(MyIcon);
+
+  MyIcon.LoadFromFile('icons/earth2.ico');
+  TrayIcon1.Icons.AddIcon(MyIcon);
+  MyIcon.LoadFromFile('icons/earth3.ico');
+  TrayIcon1.Icons.AddIcon(MyIcon);
+  MyIcon.LoadFromFile('icons/earth4.ico');
+  TrayIcon1.Icons.AddIcon(MyIcon);     }
+
+  { Set up a hint message and the animation interval. }
+  TrayIcon1.Hint := '数据同步!';
+  TrayIcon1.AnimateInterval := 200;
+
+  { Set up a hint balloon. }
+  TrayIcon1.BalloonTitle := '恢复原始窗口.';
+  TrayIcon1.BalloonHint :=
+    '双击系统图标恢复窗口.';
+  TrayIcon1.BalloonFlags := bfInfo;
+
+end;
+
+procedure TFrmMain.Timer1Timer(Sender: TObject);
+begin
+    Proc_DataAdd ;
+end;
+
+procedure TFrmMain.Timer2Timer(Sender: TObject);
+begin
+  timer1.Enabled:=true;
+end;
+
+procedure TFrmMain.TrayIcon1DblClick(Sender: TObject);
+begin
+   TrayIcon1.Visible := False;
+  Show();
+  WindowState := wsNormal;
+  Application.BringToFront();
+
+end;
+procedure TFrmMain.Proc_DataAdd;
+var
+   sql:string;
+   Fsn,Sn,OutputPower,ExtinctionRatio,EyeMask,ReceiverSensitivity,LOS_Assert,
+   LOS_Deassert ,MaxInputPower,FSJKGGL,JSJKGGL,RxPower_Point2,RxPower_Point3,
+   TxCal_Error,RxCal_Error,RxCal_Error2,RxCal_Error3,FinalTestId:string;
+begin
+   //查找最大的ID值
+   psql:='select  Max(FinalTestId) num from  Qc_SalesOrderReport ';
+   dm_DaTa.QuseryData(qry,psql);
+   if qry.FieldByName('num').asinteger=0 then
+      psql:='SELECT top 1 * FROM   MES_CodeWritingUnit  WHERE  ID>600000 order by id asc'
+    else
+      psql:='SELECT top 10 * FROM   MES_CodeWritingUnit  WHERE  ID>'+qry.FieldByName('num').AsString;
+
+   dm_DaTa.QuseryData(qry_old,psql);
+
+
+   while not qry_old.eof  do
+   begin
+     //变量赋值
+     Fsn:=qry_old.FieldByName('FSN').AsString;
+     Sn:=qry_old.FieldByName('SN').AsString;
+
+     FinalTestId:=qry_old.FieldByName('ID').AsString;
+           IF FinalTestId='' then FinalTestId:='0';
+
+     //查询终测表
+     psql:='select top 1 * from Ou_Prod_FinalTest where TestResult=''PASS'' and FSN='''+Fsn+''' order by ID DESC';
+
+     dm_DaTa.QuseryData(qry_old2,psql);
+     if qry_old2.RecordCount>0 then
+      begin
+
+         OutputPower:=qry_old2.FieldByName('Template_TxPower').AsString;
+         if OutputPower='' then OutputPower:='0.00';
+
+         ExtinctionRatio:=qry_old2.FieldByName('Template_ER').AsString;
+         IF ExtinctionRatio='' then ExtinctionRatio:='0.00';
+
+
+         EyeMask:=qry_old2.FieldByName('Margin').AsString;
+         if EyeMask='' then     EyeMask:='PASS';
+
+         ReceiverSensitivity:=qry_old2.FieldByName('RxSentivity').AsString;
+          IF ReceiverSensitivity='' then ReceiverSensitivity:='0.00';
+
+         LOS_Assert:=qry_old2.FieldByName('MIN_Los_assert').AsString;
+           IF LOS_Assert='' then LOS_Assert:='0.00';
+         LOS_Deassert:=qry_old2.FieldByName('MAX_Los_deassert').AsString;
+            IF LOS_Deassert='' then LOS_Deassert:='0.00';
+
+
+          MaxInputPower:=qry_old2.FieldByName('MaxInputPower').AsString;
+            IF MaxInputPower='' then MaxInputPower:='0';
+          FSJKGGL:=qry_old2.FieldByName('FSJKGGL').AsString;
+            IF FSJKGGL='' then FSJKGGL:='0.00';
+
+
+          JSJKGGL:=qry_old2.FieldByName('JSJKGGL').AsString;
+           IF JSJKGGL='' then JSJKGGL:='0.00';
+          RxPower_Point2:=qry_old2.FieldByName('RxPower_Point2').AsString;
+           IF RxPower_Point2='' then RxPower_Point2:='0.00';
+
+          RxPower_Point3:=qry_old2.FieldByName('RxPower_Point3').AsString;
+           IF RxPower_Point3='' then RxPower_Point3:='0.00';
+          TxCal_Error:=qry_old2.FieldByName('TxCal_Error').AsString;
+           IF TxCal_Error='' then TxCal_Error:='0.00';
+
+          RxCal_Error:=qry_old2.FieldByName('RxCal_Error').AsString;
+           IF RxCal_Error='' then RxCal_Error:='0.00';
+          RxCal_Error2:=qry_old2.FieldByName('RxCal_Error2').AsString;
+            IF RxCal_Error2='' then RxCal_Error2:='0.00';
+
+          RxCal_Error3:=qry_old2.FieldByName('RxCal_Error3').AsString;
+           IF RxCal_Error3='' then RxCal_Error3:='0.00';
+
+
+         //生成插入数据的sql语句
+         sql:=sql+'  insert into Qc_SalesOrderReport(Fsn,Sn,OutputPower,ExtinctionRatio,'
+              +'EyeMask,ReceiverSensitivity,LOS_Assert,LOS_Deassert ,MaxInputPower,FSJKGGL,JSJKGGL'
+              +',RxPower_Point2,RxPower_Point3,TxCal_Error,RxCal_Error,RxCal_Error2,RxCal_Error3,FinalTestId)'
+              +' values('''+Fsn+''','''+Sn+''','+OutputPower+', '+ExtinctionRatio+','
+              +''''+EyeMask+''','+ReceiverSensitivity+','+LOS_Assert+','+LOS_Deassert+','''+MaxInputPower+''','+FSJKGGL+','+JSJKGGL
+              +','+RxPower_Point2+','+RxPower_Point3+','+TxCal_Error+','+RxCal_Error+','+RxCal_Error2+','+RxCal_Error3+','+FinalTestId+')';
+      end;
+      qry_old.Next;
+  end;
+
+
+  if sql>'' then
+ begin
+  dm_Data.adoconn.BeginTrans;
+  dm_Data.ADOCommand.CommandText:=sql;
+//  showmessage(SqlStr);
+  dm_Data.ADOCommand.Execute();
+  dm_Data.adoconn.CommitTrans;
+ end;
+
+   psql:='select  count(Id) num from  Qc_SalesOrderReport ';
+   dm_DaTa.QuseryData(qry,psql);
+
+   lbl_Record.Caption.Text:='最新数据记录数：'+qry.FieldByName('num').AsString+' 条';
+   Timer1.Enabled:=False;
+   Timer2.Enabled:=True;
+end;
+end.

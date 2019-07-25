@@ -1,0 +1,43 @@
+unit UnPositive;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs,UnBase_AddEdit, DBCtrlsEh, Vcl.DBCtrls,
+  Vcl.StdCtrls, Vcl.Mask, RzLabel, Data.DB, Data.Win.ADODB, Vcl.Buttons,
+  Vcl.ExtCtrls, RzPanel;
+
+type
+  TfrmPositive = class(TFrmBase_AddEdit)
+    RzPanel3: TRzPanel;
+    Label1: TLabel;
+    Label2: TLabel;
+    lbl_Person: TRzLabel;
+    btn_Select: TSpeedButton;
+    RzLabel1: TRzLabel;
+    RzPanel5: TRzPanel;
+    Label31: TLabel;
+    Label3: TLabel;
+    Label28: TLabel;
+    Label4: TLabel;
+    DBEdit2: TDBEdit;
+    DBDateTimeEditEh1: TDBDateTimeEditEh;
+    DBEdit3: TDBEdit;
+    DBDateTimeEditEh2: TDBDateTimeEditEh;
+    Label5: TLabel;
+    DBEdit12: TDBEdit;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmPositive: TfrmPositive;
+
+implementation
+
+{$R *.dfm}
+
+end.

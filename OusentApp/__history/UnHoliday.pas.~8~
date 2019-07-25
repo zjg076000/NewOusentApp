@@ -1,0 +1,34 @@
+unit UnHoliday;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs,unbase_pnl, Vcl.Buttons, RzButton,
+  Vcl.ExtCtrls, RzPanel, Vcl.ComCtrls, RzDTP, RzDBDTP, RzBorder, Vcl.StdCtrls,
+  Vcl.DBCtrls, AdvGlowButton, Vcl.WinXPanels;
+
+type
+  TFrmHoliday = class(Tfrmbase_pnl)
+    RzToolbarButton3: TRzToolbarButton;
+    RzToolbarButton6: TRzToolbarButton;
+    procedure RzToolbarButton1Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FrmHoliday: TFrmHoliday;
+
+implementation
+
+{$R *.dfm}
+
+procedure TFrmHoliday.RzToolbarButton1Click(Sender: TObject);
+begin
+  close;
+end;
+
+end.

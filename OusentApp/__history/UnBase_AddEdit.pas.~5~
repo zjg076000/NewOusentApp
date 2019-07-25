@@ -1,0 +1,84 @@
+unit UnBase_AddEdit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Buttons, AdvGlowButton,
+  Vcl.ExtCtrls, RzPanel, Data.DB, Data.Win.ADODB;
+
+type
+  TFrmBase_AddEdit = class(TForm)
+    RzPanel1: TRzPanel;
+    RzPanel4: TRzPanel;
+    btnSaveAdd: TSpeedButton;
+    btnSave: TSpeedButton;
+    btnCancel: TSpeedButton;
+    RzPanel2: TRzPanel;
+    dso: TDataSource;
+    adt: TADODataSet;
+    adtPersonId: TAutoIncField;
+    adtPCode: TWideStringField;
+    adtPName: TWideStringField;
+    adtSex: TWideStringField;
+    adtDeptId: TIntegerField;
+    adtMarried: TWideStringField;
+    adtPoliticalStatus: TWideStringField;
+    adtNation: TWideStringField;
+    adtNative_Place: TWideStringField;
+    adtIdCard: TWideStringField;
+    adtBirthday: TDateTimeField;
+    adtPosition: TWideStringField;
+    adtEducation: TWideStringField;
+    adtGraduateSchool: TWideStringField;
+    adtEmail: TWideStringField;
+    adtContactNumber: TWideStringField;
+    adtAddress: TWideStringField;
+    adtHireDate: TDateTimeField;
+    adtTermDate: TDateTimeField;
+    adtLinkMan: TWideStringField;
+    adtLinkMan_Phone: TWideStringField;
+    adtIsStatus: TWideStringField;
+    adtPicture: TBlobField;
+    adtMajor: TWideStringField;
+    adtEmploymentType: TWideStringField;
+    procedure btnCancelClick(Sender: TObject);
+    procedure btnSaveClick(Sender: TObject);
+    procedure btnSaveAddClick(Sender: TObject);
+  private
+
+    _PersonId: iNTEGER; // 定义一个属性  员工编号
+    _AddOrEdit: string;
+
+  public
+      Psql: string;
+  published
+    property PersonId: integer read _PersonId write _PersonId;
+    property AddOrEdit: string read _AddOrEdit write _AddOrEdit;
+  end;
+
+var
+  FrmBase_AddEdit: TFrmBase_AddEdit;
+
+implementation
+
+{$R *.dfm}
+
+procedure TFrmBase_AddEdit.btnCancelClick(Sender: TObject);
+begin
+     adt.Cancel;
+     close;
+end;
+
+procedure TFrmBase_AddEdit.btnSaveAddClick(Sender: TObject);
+begin
+   adt.Append;
+end;
+
+procedure TFrmBase_AddEdit.btnSaveClick(Sender: TObject);
+begin
+   adt.post;
+   close;
+end;
+
+end.

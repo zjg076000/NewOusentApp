@@ -1,0 +1,205 @@
+object FrmLocate_ColumnParameter: TFrmLocate_ColumnParameter
+  Left = 0
+  Top = 0
+  BorderIcons = [biSystemMenu]
+  Caption = #25253#34920#21442#25968#35774#32622
+  ClientHeight = 379
+  ClientWidth = 248
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poMainFormCenter
+  PixelsPerInch = 96
+  TextHeight = 13
+  object RzPanel1: TRzPanel
+    Left = 0
+    Top = 347
+    Width = 248
+    Height = 32
+    Align = alBottom
+    BorderOuter = fsFlat
+    BorderSides = [sdLeft, sdRight, sdBottom]
+    TabOrder = 0
+    ExplicitTop = 317
+    object btnCancel: TAdvGlowButton
+      Left = 119
+      Top = 6
+      Width = 66
+      Height = 21
+      Caption = #21462#28040
+      Font.Charset = GB2312_CHARSET
+      Font.Color = clBlack
+      Font.Height = -12
+      Font.Name = #23435#20307
+      Font.Style = []
+      ModalResult = 7
+      NotesFont.Charset = DEFAULT_CHARSET
+      NotesFont.Color = clWindowText
+      NotesFont.Height = -11
+      NotesFont.Name = 'Tahoma'
+      NotesFont.Style = []
+      ParentFont = False
+      Picture.Data = {
+        89504E470D0A1A0A0000000D49484452000000100000001008060000001FF3FF
+        610000010749444154384F9D93814D03310C455F3760043A41CB04B001B0019D
+        00980036806E00134027A09DA0650218A11B80DEC939A5267795B0149D92FB7E
+        8E1D7BC25F3B056E81397001EC815DAC25F05DBB4C92FF733837B8FD919AFBB2
+        AB01EFC0E59867F54FEDB5FB02188BBC09C7F304379D3B01E6FC3510F9135803
+        8FF19D25DD54402BFAABF42860F13969409602AC704D5E0157033712FA54FDDB
+        08F849E2B3801AD1A2AA7909E85BD2EE5B8052972D20C4221AF923F6078C560A
+        53E0067808A58D23C895AD4B211771115D68371EB3AE88F9196D5D2139DF16AC
+        7B462DDF428857771E86AC6FA422C8CF3976FDFEA9FF334C5DE442CF00CFAD89
+        0247B934586969533D18E75F6A0536DFCB8D1E4F0000000049454E44AE426082}
+      Transparent = True
+      TabOrder = 0
+      Appearance.BorderColor = 14727579
+      Appearance.BorderColorHot = 10079963
+      Appearance.BorderColorDown = 4548219
+      Appearance.Color = 15653832
+      Appearance.ColorTo = 16178633
+      Appearance.ColorChecked = 7915518
+      Appearance.ColorCheckedTo = 11918331
+      Appearance.ColorDisabled = 15921906
+      Appearance.ColorDisabledTo = 15921906
+      Appearance.ColorDown = 7778289
+      Appearance.ColorDownTo = 4296947
+      Appearance.ColorHot = 15465983
+      Appearance.ColorHotTo = 11332863
+      Appearance.ColorMirror = 15586496
+      Appearance.ColorMirrorTo = 16245200
+      Appearance.ColorMirrorHot = 5888767
+      Appearance.ColorMirrorHotTo = 10807807
+      Appearance.ColorMirrorDown = 946929
+      Appearance.ColorMirrorDownTo = 5021693
+      Appearance.ColorMirrorChecked = 10480637
+      Appearance.ColorMirrorCheckedTo = 5682430
+      Appearance.ColorMirrorDisabled = 11974326
+      Appearance.ColorMirrorDisabledTo = 15921906
+      Appearance.GradientHot = ggVertical
+      Appearance.GradientMirrorHot = ggVertical
+      Appearance.GradientDown = ggVertical
+      Appearance.GradientMirrorDown = ggVertical
+      Appearance.GradientChecked = ggVertical
+    end
+    object AdvGlowButton2: TAdvGlowButton
+      Left = 23
+      Top = 6
+      Width = 66
+      Height = 21
+      Caption = #30830#23450
+      Font.Charset = GB2312_CHARSET
+      Font.Color = clBlack
+      Font.Height = -12
+      Font.Name = #23435#20307
+      Font.Style = []
+      ModalResult = 1
+      NotesFont.Charset = DEFAULT_CHARSET
+      NotesFont.Color = clWindowText
+      NotesFont.Height = -11
+      NotesFont.Name = 'Tahoma'
+      NotesFont.Style = []
+      ParentFont = False
+      Picture.Data = {
+        89504E470D0A1A0A0000000D49484452000000100000001008060000001FF3FF
+        610000015249444154384FA593BD4A034110C77F03390822248285565AA6B088
+        363682B136C55E1A4BE31BE893E81B184B9B648BA436828D95297C00D3595E40
+        246060653677E1EEF24120532DECFCBF6667850D4BF278D331E5095C0306A8C6
+        F703C016E0C986364A633204F58EA9397814385C64CCC197C04D37B4FDE47E46
+        A060E065CD441709892750DB7FF0B14C394FAA4E0238D6389EE0B2636E05EE57
+        A9EF95B6B93A3DE2F9FD93EFD10F0EEE7AA17DF004F5B6E9239C2F235070F3AC
+        4AF43BA6F53660FC3701C76BB7616B53076D138950D273312850DE2A7A15AD85
+        E0A952D40DEDCE1C8139A950D9DFF54A5A73CAB14DE718F51AB63C17411D2848
+        5D7899B4ED74C64C84DC101312ED9F65CE0D283344FF8C8E810807499F9268F9
+        81E5C18E61205467CFE85F6293454A04FC2A3B5A692799D88EA108CD85AB9C34
+        C65BD9148771F167121838C106D05AF999D6FC0799B67FBD809E1186C9CC0000
+        00000049454E44AE426082}
+      Transparent = True
+      TabOrder = 1
+      Appearance.BorderColor = 14727579
+      Appearance.BorderColorHot = 10079963
+      Appearance.BorderColorDown = 4548219
+      Appearance.Color = 15653832
+      Appearance.ColorTo = 16178633
+      Appearance.ColorChecked = 7915518
+      Appearance.ColorCheckedTo = 11918331
+      Appearance.ColorDisabled = 15921906
+      Appearance.ColorDisabledTo = 15921906
+      Appearance.ColorDown = 7778289
+      Appearance.ColorDownTo = 4296947
+      Appearance.ColorHot = 15465983
+      Appearance.ColorHotTo = 11332863
+      Appearance.ColorMirror = 15586496
+      Appearance.ColorMirrorTo = 16245200
+      Appearance.ColorMirrorHot = 5888767
+      Appearance.ColorMirrorHotTo = 10807807
+      Appearance.ColorMirrorDown = 946929
+      Appearance.ColorMirrorDownTo = 5021693
+      Appearance.ColorMirrorChecked = 10480637
+      Appearance.ColorMirrorCheckedTo = 5682430
+      Appearance.ColorMirrorDisabled = 11974326
+      Appearance.ColorMirrorDisabledTo = 15921906
+      Appearance.GradientHot = ggVertical
+      Appearance.GradientMirrorHot = ggVertical
+      Appearance.GradientDown = ggVertical
+      Appearance.GradientMirrorDown = ggVertical
+      Appearance.GradientChecked = ggVertical
+    end
+  end
+  object RzPanel2: TRzPanel
+    Left = 0
+    Top = 0
+    Width = 248
+    Height = 25
+    Align = alTop
+    BorderOuter = fsNone
+    BorderSides = [sdBottom]
+    TabOrder = 1
+    object chk: TCheckBox
+      Left = 8
+      Top = 2
+      Width = 49
+      Height = 17
+      Caption = #20840#36873
+      TabOrder = 0
+      OnClick = chkClick
+    end
+  end
+  object Grd: TDBGridEh
+    Left = 0
+    Top = 25
+    Width = 248
+    Height = 322
+    Align = alClient
+    DataSource = dm_DaTa.dso_Paramter
+    DynProps = <>
+    ReadOnly = True
+    TabOrder = 2
+    OnDblClick = GrdDblClick
+    Columns = <
+      item
+        Alignment = taCenter
+        CellButtons = <>
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'IsVisible'
+        Footers = <>
+        Title.Caption = #26174#31034
+        Width = 60
+      end
+      item
+        CellButtons = <>
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'TitleValue'
+        Footers = <>
+        Title.Caption = #25968#25454#21015#21517#31216
+        Width = 162
+      end>
+    object RowDetailData: TRowDetailPanelControlEh
+    end
+  end
+end

@@ -1,0 +1,26 @@
+unit UnOrderNumData;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs,Unbase_pnl, AdvSmoothLabel, Vcl.Buttons,
+  RzButton, Vcl.ExtCtrls, RzPanel;
+
+type
+  TFrmOrderNumData = class(Tfrmbase_pnl)
+    advsmthlbl1: TAdvSmoothLabel;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FrmOrderNumData: TFrmOrderNumData;
+
+implementation
+
+{$R *.dfm}
+
+end.

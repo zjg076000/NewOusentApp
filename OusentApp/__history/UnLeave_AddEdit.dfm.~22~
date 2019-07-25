@@ -1,0 +1,416 @@
+inherited FrmLeave_AddEdit: TFrmLeave_AddEdit
+  Caption = 'FrmLeave_AddEdit'
+  ClientHeight = 376
+  ClientWidth = 415
+  Font.Charset = DEFAULT_CHARSET
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  ExplicitWidth = 431
+  ExplicitHeight = 414
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited RzPanel1: TRzPanel
+    Width = 415
+    ExplicitWidth = 415
+    object Label1: TLabel
+      Left = 28
+      Top = 12
+      Width = 48
+      Height = 12
+      Caption = #35760#24405#21495'  '
+      Font.Charset = GB2312_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = #23435#20307
+      Font.Style = []
+      ParentFont = False
+    end
+    object RzDBLabel1: TRzDBLabel
+      Left = 86
+      Top = 11
+      Width = 113
+      Height = 17
+      Font.Charset = GB2312_CHARSET
+      Font.Color = clBlue
+      Font.Height = -12
+      Font.Name = #23435#20307
+      Font.Style = []
+      ParentFont = False
+      BorderInner = fsFlat
+      BorderSides = [sdBottom]
+      BorderWidth = 1
+      DataField = 'LeaveId'
+      DataSource = dso
+    end
+  end
+  inherited RzPanel4: TRzPanel
+    Top = 335
+    Width = 415
+    ExplicitTop = 335
+    ExplicitWidth = 415
+    inherited btnSaveAdd: TSpeedButton
+      Left = 173
+      Top = 7
+      ExplicitLeft = 173
+      ExplicitTop = 7
+    end
+    inherited btnSave: TSpeedButton
+      Left = 256
+      Top = 7
+      ExplicitLeft = 256
+      ExplicitTop = 7
+    end
+    inherited btnCancel: TSpeedButton
+      Left = 340
+      Top = 7
+      ExplicitLeft = 340
+      ExplicitTop = 7
+    end
+  end
+  inherited RzPanel2: TRzPanel
+    Width = 415
+    Height = 301
+    ExplicitWidth = 415
+    ExplicitHeight = 301
+    object Label21: TLabel
+      Left = 29
+      Top = 19
+      Width = 42
+      Height = 12
+      Caption = #22995'   '#21517
+      Font.Charset = GB2312_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = #23435#20307
+      Font.Style = []
+      ParentFont = False
+    end
+    object lbl_Person: TRzLabel
+      Left = 91
+      Top = 17
+      Width = 110
+      Height = 14
+      AutoSize = False
+      Caption = 'lbl_Person'
+      BorderInner = fsFlat
+      BorderSides = [sdBottom]
+    end
+    object SpeedButton1: TSpeedButton
+      Left = 207
+      Top = 9
+      Width = 20
+      Height = 20
+      Caption = #8595
+      OnClick = SpeedButton1Click
+    end
+    object Label31: TLabel
+      Left = 28
+      Top = 49
+      Width = 48
+      Height = 12
+      Caption = #35831#20551#20107#30001
+      Font.Charset = GB2312_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = #23435#20307
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label28: TLabel
+      Left = 26
+      Top = 161
+      Width = 48
+      Height = 12
+      Caption = #24320#22987#26102#38388
+      Font.Charset = GB2312_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = #23435#20307
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label3: TLabel
+      Left = 29
+      Top = 201
+      Width = 48
+      Height = 12
+      Caption = #32467#26463#26102#38388
+      Font.Charset = GB2312_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = #23435#20307
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label40: TLabel
+      Left = 29
+      Top = 235
+      Width = 36
+      Height = 12
+      Caption = #23567#26102#25968
+      Font.Charset = GB2312_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = #23435#20307
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label41: TLabel
+      Left = 26
+      Top = 270
+      Width = 48
+      Height = 12
+      Caption = #30003#35831#26085#26399
+      Font.Charset = GB2312_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = #23435#20307
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label2: TLabel
+      Left = 29
+      Top = 123
+      Width = 48
+      Height = 12
+      Caption = #35831#20551#31867#22411
+      Font.Charset = GB2312_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = #23435#20307
+      Font.Style = []
+      ParentFont = False
+    end
+    object DBLookupComboBox1: TDBLookupComboBox
+      Left = 87
+      Top = 122
+      Width = 139
+      Height = 19
+      BevelEdges = [beBottom]
+      BevelInner = bvNone
+      BevelOuter = bvNone
+      BevelKind = bkFlat
+      Ctl3D = False
+      ParentCtl3D = False
+      TabOrder = 6
+    end
+    object DBEdit2: TDBEdit
+      Left = 87
+      Top = 46
+      Width = 290
+      Height = 66
+      AutoSize = False
+      BevelEdges = [beBottom]
+      BevelKind = bkFlat
+      BorderStyle = bsNone
+      Ctl3D = True
+      DataField = 'Reason'
+      DataSource = dso
+      ImeName = #20013#25991'('#31616#20307') - '#25628#29399#25340#38899#36755#20837#27861
+      ParentCtl3D = False
+      TabOrder = 0
+    end
+    object DBEdit12: TDBEdit
+      Left = 84
+      Top = 231
+      Width = 140
+      Height = 18
+      AutoSize = False
+      BevelEdges = [beBottom]
+      BevelKind = bkFlat
+      BorderStyle = bsNone
+      Ctl3D = True
+      DataField = 'HourTime'
+      DataSource = dso
+      ImeName = #20013#25991'('#31616#20307') - '#25628#29399#25340#38899#36755#20837#27861
+      ParentCtl3D = False
+      TabOrder = 1
+    end
+    object DBDateTimeEditEh1: TDBDateTimeEditEh
+      Left = 88
+      Top = 160
+      Width = 136
+      Height = 21
+      BevelEdges = [beBottom]
+      BevelKind = bkFlat
+      BorderStyle = bsNone
+      DataField = 'BeginTime'
+      DataSource = dso
+      DynProps = <>
+      EditButtons = <>
+      TabOrder = 2
+      Visible = True
+      EditFormat = 'yyyy-mm-dd hh:nn'
+    end
+    object DBDateTimeEditEh3: TDBDateTimeEditEh
+      Left = 88
+      Top = 266
+      Width = 134
+      Height = 21
+      BevelEdges = [beBottom]
+      BevelKind = bkFlat
+      BorderStyle = bsNone
+      DataField = 'LeaveDate'
+      DataSource = dso
+      DynProps = <>
+      EditButtons = <>
+      TabOrder = 3
+      Visible = True
+      EditFormat = 'yyyy-mm-dd '
+    end
+    object DBDateTimeEditEh2: TDBDateTimeEditEh
+      Left = 88
+      Top = 193
+      Width = 136
+      Height = 21
+      BevelEdges = [beBottom]
+      BevelKind = bkFlat
+      BorderStyle = bsNone
+      DataField = 'EndTime'
+      DataSource = dso
+      DynProps = <>
+      EditButtons = <>
+      TabOrder = 5
+      Visible = True
+      EditFormat = 'yyyy-mm-dd hh:nn'
+    end
+    object pnl_Dept: TRzPanel
+      Left = 91
+      Top = 30
+      Width = 173
+      Height = 180
+      BorderOuter = fsFlat
+      TabOrder = 4
+      Visible = False
+      object Grd: TDBGridEh
+        Left = 1
+        Top = 1
+        Width = 171
+        Height = 178
+        Align = alClient
+        AllowedSelections = [gstRecordBookmarks, gstRectangle, gstAll]
+        BorderStyle = bsNone
+        ColumnDefValues.AlwaysShowEditButton = True
+        ColumnDefValues.Title.TitleButton = True
+        ColumnDefValues.ToolTips = True
+        Ctl3D = True
+        DataSource = dso_person
+        DynProps = <>
+        EditActions = [geaCopyEh, geaSelectAllEh]
+        Flat = True
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Microsoft Sans Serif'
+        Font.Style = []
+        FooterParams.Color = clBtnFace
+        ImeName = #20013#25991'('#31616#20307') - '#25628#29399#25340#38899#36755#20837#27861
+        IndicatorOptions = [gioShowRecNoEh]
+        IndicatorTitle.ShowDropDownSign = True
+        IndicatorTitle.TitleButton = True
+        Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgMultiSelect]
+        OptionsEh = [dghFixed3D, dghFooter3D, dghClearSelection, dghAutoSortMarking, dghMultiSortMarking, dghTraceColSizing, dghIncSearch, dghPreferIncSearch, dghRowHighlight, dghDblClickOptimizeColWidth, dghDialogFind, dghShowRecNo, dghColumnResize, dghColumnMove, dghHotTrack, dghExtendVertLines]
+        ParentCtl3D = False
+        ParentFont = False
+        ParentShowHint = False
+        RowDetailPanel.Height = 350
+        RowDetailPanel.BevelEdges = []
+        RowDetailPanel.BevelInner = bvNone
+        RowDetailPanel.BevelOuter = bvNone
+        RowDetailPanel.BorderStyle = bsNone
+        RowHeight = 20
+        RowSizingAllowed = True
+        ShowHint = True
+        SortLocal = True
+        STFilter.Local = True
+        STFilter.Location = stflInTitleFilterEh
+        STFilter.Visible = True
+        SumList.Active = True
+        TabOrder = 0
+        TitleParams.MultiTitle = True
+        OnDblClick = GrdDblClick
+        Columns = <
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'PName'
+            Footers = <>
+            Title.Alignment = taLeftJustify
+            Title.Caption = #21592#24037#22995#21517
+            Width = 140
+          end>
+        object TRowDetailPanelControlEh
+        end
+      end
+    end
+  end
+  inherited adt: TADODataSet
+    Active = False
+    AfterScroll = adtAfterScroll
+    CommandText = 'select *  from Hrm_Leave'
+    object adtLeaveId: TLargeintField
+      FieldName = 'LeaveId'
+      ReadOnly = True
+    end
+    object adtPersonId: TIntegerField
+      FieldName = 'PersonId'
+    end
+    object adtDeptId: TIntegerField
+      FieldName = 'DeptId'
+    end
+    object adtReason: TWideStringField
+      FieldName = 'Reason'
+      Size = 200
+    end
+    object adtBeginTime: TDateTimeField
+      FieldName = 'BeginTime'
+      DisplayFormat = 'D'
+    end
+    object adtEndTime: TDateTimeField
+      FieldName = 'EndTime'
+      DisplayFormat = 'D'
+    end
+    object adtHourTime: TBCDField
+      FieldName = 'HourTime'
+      Precision = 18
+      Size = 2
+    end
+    object adtOnDate: TDateTimeField
+      FieldName = 'OnDate'
+    end
+    object adtLeaveDate: TDateTimeField
+      FieldName = 'LeaveDate'
+    end
+  end
+  object mte_Person: TMemTableEh
+    Active = True
+    Params = <>
+    DataDriver = dsd_person
+    Left = 200
+  end
+  object dsd_person: TDataSetDriverEh
+    ProviderDataSet = adt_Person
+    Left = 264
+  end
+  object adt_Person: TADODataSet
+    Active = True
+    Connection = dm_DaTa.adoconn
+    CursorType = ctStatic
+    CommandText = ' select   *  from  Hrm_Person'#13#10#13#10
+    Parameters = <>
+    Left = 320
+    Top = 1
+  end
+  object dso_person: TDataSource
+    DataSet = mte_Person
+    Left = 376
+    Top = 1
+  end
+  object adq: TADOQuery
+    Connection = dm_DaTa.adoconn
+    Parameters = <>
+    Left = 335
+    Top = 232
+  end
+end

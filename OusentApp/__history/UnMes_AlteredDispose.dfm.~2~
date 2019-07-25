@@ -1,0 +1,16 @@
+object FrmMes_AlteredDispose: TFrmMes_AlteredDispose
+  Left = 0
+  Top = 0
+  Caption = #20135#21697#39044#35686#22788#29702
+  ClientHeight = 357
+  ClientWidth = 525
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  PixelsPerInch = 96
+  TextHeight = 13
+end

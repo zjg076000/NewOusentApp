@@ -1,0 +1,215 @@
+unit UnSalesOrderReport;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs,unbase_pnl, AdvSmoothLabel, Vcl.Buttons,
+  RzButton, Vcl.ExtCtrls, RzPanel, DBGridEhGrouping, ToolCtrlsEh,
+  DBGridEhToolCtrls, DynVarsEh, Vcl.StdCtrls, Vcl.Samples.Spin, AdvGlowButton,
+  Vcl.ComCtrls, EhLibVCL, GridsEh, DBAxisGridsEh, DBGridEh, MemTableDataEh,
+  Data.DB, MemTableEh, DataDriverEh, Data.Win.ADODB;
+
+type
+  TFrmSalesOrderReport = class(Tfrmbase_pnl)
+    advsmthlbl1: TAdvSmoothLabel;
+    GRD: TDBGridEh;
+    RzPanel3: TRzPanel;
+    Label1: TLabel;
+    RzPanel4: TRzPanel;
+    Label28: TLabel;
+    Label2: TLabel;
+    btn_OrderNum_Locate: TAdvGlowButton;
+    chk_select: TCheckBox;
+    RzPanel2: TRzPanel;
+    Label3: TLabel;
+    SpinEdt: TSpinEdit;
+    btnFixCell: TAdvGlowButton;
+    date_Return: TDateTimePicker;
+    date_change: TDateTimePicker;
+    cbb_begin: TComboBox;
+    cbb_end: TComboBox;
+    qry_erp: TADOQuery;
+    qry: TADOQuery;
+    adt: TADODataSet;
+    adtId: TLargeintField;
+    adtOrderType: TWideStringField;
+    adtOrderDate: TDateTimeField;
+    adtOrderNum: TWideStringField;
+    adtSupplier: TWideStringField;
+    adtProductType: TWideStringField;
+    adtAmount: TBCDField;
+    adtPrice: TFMTBCDField;
+    adtCurrency: TWideStringField;
+    adtAmountMoney: TBCDField;
+    adtReceivedNum: TBCDField;
+    adtDeliveryDate: TDateTimeField;
+    adtEstimateDate: TDateTimeField;
+    adtReceivedDate: TDateTimeField;
+    adtOffsetDay: TIntegerField;
+    adtOrderState: TWideStringField;
+    adtBuyer: TWideStringField;
+    adtNote: TWideStringField;
+    adtOrderNumNote: TWideStringField;
+    adtNote02: TWideStringField;
+    adtIsDelay: TBooleanField;
+    adtSpecifications: TWideStringField;
+    adtSupplierName: TWideStringField;
+    adtReturnedNum: TBCDField;
+    adtReturnedDate: TDateTimeField;
+    adtIsSelect: TBooleanField;
+    adtChangeDueDate: TWideStringField;
+    dsd: TDataSetDriverEh;
+    dso: TDataSource;
+    mte: TMemTableEh;
+    mteId: TLargeintField;
+    mteOrderType: TWideStringField;
+    mteOrderDate: TDateTimeField;
+    mteOrderNum: TWideStringField;
+    mteSupplier: TWideStringField;
+    mteProductType: TWideStringField;
+    mteAmount: TBCDField;
+    mtePrice: TFMTBCDField;
+    mteCurrency: TWideStringField;
+    mteAmountMoney: TBCDField;
+    mteReceivedNum: TBCDField;
+    mteDeliveryDate: TDateTimeField;
+    mteEstimateDate: TDateTimeField;
+    mteReceivedDate: TDateTimeField;
+    mteOffsetDay: TIntegerField;
+    mteOrderState: TWideStringField;
+    mteBuyer: TWideStringField;
+    mteNote: TWideStringField;
+    mteOrderNumNote: TWideStringField;
+    mteNote02: TWideStringField;
+    mteIsDelay: TBooleanField;
+    mteSpecifications: TWideStringField;
+    mteSupplierName: TWideStringField;
+    mteReturnedNum: TBCDField;
+    mteReturnedDate: TDateTimeField;
+    mteIsSelect: TBooleanField;
+    mteChangeDueDate: TWideStringField;
+    qry_old: TADOQuery;
+    qry_old2: TADOQuery;
+    procedure btnFixCellClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure btn_OrderNum_LocateClick(Sender: TObject);
+  private
+      procedure Proc_DataAdd;
+  public
+
+  end;
+
+var
+  FrmSalesOrderReport: TFrmSalesOrderReport;
+
+implementation
+  uses UnData;
+{$R *.dfm}
+
+procedure TFrmSalesOrderReport.btnFixCellClick(Sender: TObject);
+begin
+
+  GRD.FrozenCols:=SpinEdt.Value;
+
+end;
+
+procedure TFrmSalesOrderReport.btn_OrderNum_LocateClick(Sender: TObject);
+begin
+  ///inherited;
+  PSQL:='Select * from Qc_SalesOrderReport where Sn>='''+trim(cbb_begin.Text)+''' and '
+       +'Sn<='''+trim(cbb_end.Text)+'''';
+
+  dm_DaTa.proc_ActiveAdodataset(adt,PSQL);
+
+
+
+end;
+
+procedure TFrmSalesOrderReport.FormCreate(Sender: TObject);
+begin
+ // Proc_DataAdd;
+
+end;
+
+procedure TFrmSalesOrderReport.Proc_DataAdd;
+var
+   sql:string;
+   Fsn,Sn,OutputPower,ExtinctionRatio,EyeMask,ReceiverSensitivity,LOS_Assert,
+   LOS_Deassert ,MaxInputPower,FSJKGGL,JSJKGGL,RxPower_Point2,RxPower_Point3,
+   TxCal_Error,RxCal_Error,RxCal_Error2,RxCal_Error3,FinalTestId:string;
+begin
+   //查找最大的ID值
+   psql:='select  Max(Id) num from  Qc_SalesOrderReport ';
+   dm_DaTa.QuseryData(qry,psql);
+   if qry.FieldByName('num').asinteger=0 then
+      psql:='SELECT * FROM   MES_CodeWritingUnit  WHERE  ID>600000'
+    else
+      psql:='SELECT * FROM   MES_CodeWritingUnit  WHERE  ID>'+qry.FieldByName('num').AsString;
+
+   dm_DaTa.QuseryData(qry_old,psql);
+
+
+   while not qry_old.eof  do
+   begin
+     //变量赋值
+     Fsn:=qry_old.FieldByName('FSN').AsString;
+     Sn:=qry_old.FieldByName('SN').AsString;
+     //查询终测表
+     psql:='select top 1 * from Ou_Prod_FinalTest where TestResult=''PASS'' and FSN='''+Fsn+'''';
+
+     dm_DaTa.QuseryData(qry_old2,psql);
+     if qry_old2.RecordCount>0 then
+      begin
+         OutputPower:=qry_old2.FieldByName('Template_TxPower').AsString;
+         ExtinctionRatio:=qry_old2.FieldByName('Template_ER').AsString;
+
+         EyeMask:=qry_old2.FieldByName('Margin').AsString;
+         ReceiverSensitivity:=qry_old2.FieldByName('RxSentivity').AsString;
+
+         LOS_Assert:=qry_old2.FieldByName('MIN_Los_assert').AsString;
+         LOS_Deassert:=qry_old2.FieldByName('MAX_Los_deassert').AsString;
+
+          MaxInputPower:=qry_old2.FieldByName('MaxInputPower').AsString;
+          FSJKGGL:=qry_old2.FieldByName('FSJKGGL').AsString;
+
+          JSJKGGL:=qry_old2.FieldByName('JSJKGGL').AsString;
+          RxPower_Point2:=qry_old2.FieldByName('RxPower_Point2').AsString;
+
+          RxPower_Point3:=qry_old2.FieldByName('RxPower_Point3').AsString;
+          TxCal_Error:=qry_old2.FieldByName('TxCal_Error').AsString;
+
+          RxCal_Error:=qry_old2.FieldByName('RxCal_Error').AsString;
+          RxCal_Error2:=qry_old2.FieldByName('RxCal_Error2').AsString;
+
+          RxCal_Error3:=qry_old2.FieldByName('RxCal_Error3').AsString;
+          FinalTestId:=qry_old2.FieldByName('ID').AsString;
+
+
+         //生成插入数据的sql语句
+         sql:=sql+'  insert into Qc_SalesOrderReport(Fsn,Sn,OutputPower,ExtinctionRatio,'
+              +'EyeMask,ReceiverSensitivity,LOS_Assert,LOS_Deassert ,MaxInputPower,FSJKGGL,JSJKGGL'
+              +',RxPower_Point2,RxPower_Point3,TxCal_Error,RxCal_Error,RxCal_Error2,RxCal_Error3,FinalTestId)'
+              +' values('''+Fsn+''','''+Sn+''','+OutputPower+', '+ExtinctionRatio+','
+              +''''+EyeMask+''','+ReceiverSensitivity+','+LOS_Assert+','+LOS_Deassert+','''+MaxInputPower+''','+FSJKGGL+','+JSJKGGL
+              +','+RxPower_Point2+','+RxPower_Point3+','+TxCal_Error+','+RxCal_Error+','+RxCal_Error2+','+RxCal_Error3+','+FinalTestId+')';
+      end;
+      qry_old.Next;
+  end;
+
+
+  if sql>'' then
+ begin
+  dm_Data.adoconn.BeginTrans;
+  dm_Data.ADOCommand.CommandText:=sql;
+//  showmessage(SqlStr);
+  dm_Data.ADOCommand.Execute();
+  dm_Data.adoconn.CommitTrans;
+ end;
+
+
+
+
+end;
+
+end.

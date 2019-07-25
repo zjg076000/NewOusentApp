@@ -1,0 +1,120 @@
+inherited FrmLeaveType: TFrmLeaveType
+  Caption = #35831#20551#31867#22411
+  ClientHeight = 341
+  ClientWidth = 236
+  Font.Charset = DEFAULT_CHARSET
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  ExplicitWidth = 252
+  ExplicitHeight = 379
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited RzPanel1: TRzPanel
+    Top = 313
+    Width = 236
+    Align = alBottom
+    ExplicitWidth = 236
+    inherited RzToolbarButton1: TRzToolbarButton
+      Left = 173
+    end
+  end
+  object Grd: TDBGridEh
+    Left = 0
+    Top = 0
+    Width = 236
+    Height = 313
+    Align = alClient
+    AllowedSelections = [gstRecordBookmarks, gstRectangle, gstAll]
+    BorderStyle = bsNone
+    ColumnDefValues.AlwaysShowEditButton = True
+    ColumnDefValues.Title.TitleButton = True
+    ColumnDefValues.ToolTips = True
+    Ctl3D = True
+    DataSource = ds
+    DynProps = <>
+    EditActions = [geaCopyEh, geaSelectAllEh]
+    Flat = True
+    Font.Charset = GB2312_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -12
+    Font.Name = #23435#20307
+    Font.Style = []
+    FooterParams.Color = clBtnFace
+    FooterParams.FillStyle = cfstThemedEh
+    FooterParams.HorzLines = True
+    FooterParams.VertLines = False
+    GridLineParams.DataHorzLines = True
+    GridLineParams.DataVertLines = True
+    ImeName = #20013#25991'('#31616#20307') - '#25628#29399#25340#38899#36755#20837#27861
+    IndicatorOptions = [gioShowRowIndicatorEh, gioShowRecNoEh]
+    IndicatorParams.HorzLines = True
+    IndicatorParams.VertLines = True
+    IndicatorTitle.TitleButton = True
+    IndicatorTitle.UseGlobalMenu = False
+    Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgMultiSelect]
+    OptionsEh = [dghFixed3D, dghFooter3D, dghClearSelection, dghAutoSortMarking, dghMultiSortMarking, dghTraceColSizing, dghIncSearch, dghPreferIncSearch, dghRowHighlight, dghDblClickOptimizeColWidth, dghDialogFind, dghShowRecNo, dghColumnResize, dghColumnMove, dghHotTrack, dghExtendVertLines]
+    ParentCtl3D = False
+    ParentFont = False
+    ParentShowHint = False
+    RowDetailPanel.Height = 350
+    RowDetailPanel.BevelEdges = []
+    RowDetailPanel.BevelInner = bvNone
+    RowDetailPanel.BevelOuter = bvNone
+    RowDetailPanel.BorderStyle = bsNone
+    RowHeight = 20
+    RowSizingAllowed = True
+    ShowHint = True
+    SortLocal = True
+    STFilter.Local = True
+    STFilter.Location = stflInTitleFilterEh
+    STFilter.Visible = True
+    SumList.Active = True
+    TabOrder = 1
+    TitleParams.HorzLines = True
+    TitleParams.MultiTitle = True
+    TitleParams.VertLines = True
+    Columns = <
+      item
+        CellButtons = <>
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'Name'
+        Footers = <>
+        Title.Alignment = taLeftJustify
+        Title.Caption = #31867#21035#21517#31216
+        Title.EndEllipsis = True
+        Title.ShowImageAndText = False
+        Title.SortIndex = 1
+        Title.SortMarker = smDownEh
+        Width = 146
+      end>
+    object TRowDetailPanelControlEh
+    end
+  end
+  object adt: TADODataSet
+    Active = True
+    Connection = dm_DaTa.adoconn
+    CursorType = ctStatic
+    CommandText = 'select * from Hrm_LeaveType'
+    Parameters = <>
+    Left = 56
+    Top = 144
+  end
+  object ds: TDataSource
+    DataSet = mte
+    Left = 104
+    Top = 136
+  end
+  object mte: TMemTableEh
+    Active = True
+    Params = <>
+    DataDriver = dsd
+    Left = 56
+    Top = 216
+  end
+  object dsd: TDataSetDriverEh
+    ProviderDataSet = adt
+    Left = 88
+    Top = 232
+  end
+end

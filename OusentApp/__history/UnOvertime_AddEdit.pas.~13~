@@ -1,0 +1,43 @@
+unit UnOvertime_AddEdit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs,unbase_AddEdit, Data.DB, Data.Win.ADODB,
+  Vcl.Buttons, Vcl.ExtCtrls, RzPanel, Vcl.StdCtrls, DBCtrlsEh, Vcl.Mask,
+  Vcl.DBCtrls, RzLabel, RzDBLbl;
+
+type
+  TFrmOverTime_AddEdit = class(Tfrmbase_AddEdit)
+    Label21: TLabel;
+    SpeedButton1: TSpeedButton;
+    Label31: TLabel;
+    DBEdit2: TDBEdit;
+    Label28: TLabel;
+    DBDateTimeEditEh1: TDBDateTimeEditEh;
+    Label3: TLabel;
+    Label40: TLabel;
+    DBEdit12: TDBEdit;
+    Label41: TLabel;
+    DBDateTimeEditEh3: TDBDateTimeEditEh;
+    DBDateTimeEditEh2: TDBDateTimeEditEh;
+    lbl_Person: TRzLabel;
+    Label1: TLabel;
+    DBLookupComboBox1: TDBLookupComboBox;
+    Label2: TLabel;
+    RzDBLabel1: TRzDBLabel;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FrmOverTime_AddEdit: TFrmOverTime_AddEdit;
+
+implementation
+        uses undata;
+{$R *.dfm}
+
+end.

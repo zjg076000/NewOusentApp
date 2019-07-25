@@ -1,0 +1,17 @@
+unit UnCommon;
+
+interface
+   uses IdFTP,System.Classes,System.Generics.Collections,IdFTPList, IdFTPCommon,System.SysUtils;
+
+     //连接FTP服务器
+   function FtpDirectoryExists(IdFtp:TIdFtp;ADir:string):Boolean;
+
+implementation
+
+     //判断当面工作目录下的子目录是否存在
+function FtpDirectoryExists(IdFtp:TIdFtp;ADir:string):Boolean;
+begin
+
+end;
+
+end.

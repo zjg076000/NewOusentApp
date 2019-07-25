@@ -1,0 +1,90 @@
+unit UnLeave_AddEdit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Buttons, Vcl.StdCtrls, Vcl.Mask,
+  Vcl.DBCtrls, Vcl.ComCtrls, RzDTP, RzDBDTP, AdvGlowButton, RzBorder, RzLabel,
+  RzDBLbl, Vcl.ExtCtrls, RzPanel,unbase_addedit, Data.DB, Data.Win.ADODB,
+  RzEdit, RzDBEdit, AdvDateTimePicker, AdvDBDateTimePicker, DBCtrlsEh,
+  DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh, EhLibVCL,
+  GridsEh, DBAxisGridsEh, DBGridEh, MemTableDataEh, DataDriverEh, MemTableEh;
+
+type
+  TFrmLeave_AddEdit = class(TFrmBase_AddEdit)
+    Label1: TLabel;
+    RzDBLabel1: TRzDBLabel;
+    Label21: TLabel;
+    lbl_Person: TRzLabel;
+    SpeedButton1: TSpeedButton;
+    Label31: TLabel;
+    DBEdit2: TDBEdit;
+    Label28: TLabel;
+    Label3: TLabel;
+    Label40: TLabel;
+    DBEdit12: TDBEdit;
+    Label41: TLabel;
+    adtLeaveId: TLargeintField;
+    adtPersonId: TIntegerField;
+    adtDeptId: TIntegerField;
+    adtReason: TWideStringField;
+    adtBeginTime: TDateTimeField;
+    adtEndTime: TDateTimeField;
+    adtHourTime: TBCDField;
+    adtOnDate: TDateTimeField;
+    adtLeaveDate: TDateTimeField;
+    DBDateTimeEditEh1: TDBDateTimeEditEh;
+    DBDateTimeEditEh2: TDBDateTimeEditEh;
+    DBDateTimeEditEh3: TDBDateTimeEditEh;
+    pnl_Dept: TRzPanel;
+    Grd: TDBGridEh;
+    mte_Person: TMemTableEh;
+    dsd_person: TDataSetDriverEh;
+    adt_Person: TADODataSet;
+    dso_person: TDataSource;
+    adq: TADOQuery;
+    procedure GrdDblClick(Sender: TObject);
+    procedure adtAfterScroll(DataSet: TDataSet);
+    procedure SpeedButton1Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FrmLeave_AddEdit: TFrmLeave_AddEdit;
+
+implementation
+     uses undata;
+{$R *.dfm}
+
+procedure TFrmLeave_AddEdit.adtAfterScroll(DataSet: TDataSet);
+begin
+  if DataSet.FieldByName('PersonId').IsNull then
+   begin
+    lbl_Person.Caption:='';
+    exit;
+   end;
+   Psql:='select * From Hrm_Person where PersonId='+DataSet.FieldByName('PersonId').AsString;
+   dm_Data.QuseryData(adq,Psql);
+   lbl_Person.Caption:=adq.FieldByName('PName').AsString;
+end;
+
+procedure TFrmLeave_AddEdit.GrdDblClick(Sender: TObject);
+begin
+    adt.FieldByName('PersonId').AsInteger:=mte_Person.FieldByName('PersonId').AsInteger;
+    adt.FieldByName('DeptId').AsInteger:=mte_Person.FieldByName('DeptId').AsInteger;
+
+    lbl_Person.Caption:=mte_Person.FieldByName('PName').asstring;
+    pnl_dept.Visible:=false;
+end;
+
+procedure TFrmLeave_AddEdit.SpeedButton1Click(Sender: TObject);
+begin
+   pnl_dept.Visible:=not pnl_dept.Visible;
+
+end;
+
+end.
